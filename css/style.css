@@ -202,6 +202,7 @@ h1{white-space:pre-line;font-size:clamp(34px,4.6vw,62px);font-weight:900;letter-
   .cr,.tb{grid-template-columns:1fr;gap:8px}
   .boxes{grid-template-columns:1fr}.b3,.b4,.b5,.b7{grid-column:span 1}
   .cta{padding:32px 22px 36px}
+  .cta h2{font-size:21px;font-weight:700;letter-spacing:-.03em;line-height:1.5;margin:12px 0 26px}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
