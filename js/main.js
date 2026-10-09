@@ -89,7 +89,7 @@ addEventListener('resize', spy);
 spy();
 
 // ── 섹션 등장 모션 ──
-document.querySelectorAll('.sh, .panel, .kpi').forEach(el => {
+document.querySelectorAll('.sh, .panel, .kpi, .wk, .box').forEach(el => {
   if (el.closest('#overview') && !el.closest('.two')) return; // 첫 화면은 바로 보인다
   el.classList.add('rv');
   onceVisible(el, () => el.classList.add('in'), 0.12);
