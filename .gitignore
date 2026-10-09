@@ -1,0 +1,5 @@
+# 공개 저장소에 올리지 않는 것: 원본 자료, 디자인 샘플, 기획 문서
+assets/raw/
+style-samples/
+PRD.md
+.DS_Store
