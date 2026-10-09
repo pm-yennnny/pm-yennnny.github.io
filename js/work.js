@@ -11,7 +11,7 @@ const BLOCK = {
   list: b => `<ul class="dash big">${li(b.items)}</ul>`,
   steps: b => `<ol class="steps">${b.items.map((s, i) => `<li><span class="mono">${String(i + 1).padStart(2, '0')}</span><div><h3>${esc(s.h)}</h3><p>${esc(s.p)}</p></div></li>`).join('')}</ol>`,
   chips: b => `<div class="chips pad">${b.items.map(t => `<i>${esc(t)}</i>`).join('')}</div>`,
-  flow: b => `<div class="flow3">${b.cols.map((c, i) => `<div><h3><span class="mono">${i + 1}</span>${esc(c.h)}</h3><ul class="dash">${li(c.items)}</ul></div>`).join('')}</div>`,
+  flow: b => `<div class="flow3${b.plain ? ' plain' : ''}">${b.cols.map((c, i) => `<div><h3><span class="mono">${i + 1}</span>${esc(c.h)}</h3><ul class="dash">${li(c.items)}</ul></div>`).join('')}</div>`,
   compare: b => `<div class="cmp">${b.items.map(c => `<div class="cmp-row"><p class="cmp-l">${esc(c.l)}</p><div class="cmp-b"><small class="mono">${esc(c.bn)}</small><b>${esc(c.before)}</b></div><span class="cmp-ar">→</span><div class="cmp-a"><small class="mono">${esc(c.an)}</small><b>${esc(c.after)}</b></div></div>`).join('')}</div>`,
   figures: b => `<div class="figs ${b.layout}">${b.items.map(fig).join('')}</div>`,
   results: b => `<div class="res2"><div><h3>정량 성과</h3><ul class="dash">${li(b.quant)}</ul></div><div><h3>정성 성과</h3><ul class="dash">${li(b.qual)}</ul></div></div>`,

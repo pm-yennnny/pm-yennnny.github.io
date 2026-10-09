@@ -352,3 +352,6 @@ a.job:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
   .wk-t b{font-size:17px}
   .wk-t small{display:none}
 }
+
+/* 순서가 아니라 나란한 분류일 때는 화살표를 숨긴다 */
+.flow3.plain>div::after{display:none}
