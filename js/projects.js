@@ -3,7 +3,36 @@
 // blocks 종류: list(목록) · steps(번호 단계) · chips(꼬리표) · flow(흐름 3단) · compare(전후 비교) · figures(이미지) · code(코드 예시) · results(성과) · todo(준비 중 안내)
 window.PROJECTS = [
   {
-    slug: 'recommend', no: '01', title: '개인화 추천 서비스', type: 'AI 추천', period: '2023.01 – 2023.08', status: '완료',
+    slug: 'geo', no: '01', title: 'GEO 기반 검색 최적화 체계 구축', type: '검색 · GEO', period: '2026.03 –', status: '진행 중',
+    company: '풀무원 · 식품 D2C 자사몰',
+    summary: '생성형 검색(GEO) 환경에서 AI가 서비스 정보를 정확히 읽을 수 있도록 구조화 데이터를 설계하고, 그 효과를 지표로 확인하는 체계를 만들고 있습니다.',
+    role: '구조화 데이터(JSON-LD) 설계 · 운영 정책 수립', team: '개발 · 마케팅 등 유관 부서와 협업', contrib: 0,
+    kpis: [{ v: '+174%', l: '유입 세션' }, { v: '+153%', l: '검색 유입 기반 매출' }, { v: '3유형', l: '상품 · 브랜드 · 콘텐츠 데이터 정의' }],
+    blocks: [
+      { type: 'steps', title: '어떻게 풀었나', items: [
+        { h: '구조화 데이터 설계', p: '생성형 검색 환경에 대응하기 위해 서비스 정보를 구조화 데이터(JSON-LD)로 설계했습니다.' },
+        { h: '데이터 항목 정의와 매핑', p: '상품, 브랜드, 콘텐츠별로 필요한 데이터 항목을 정의하고, 기존 서비스 데이터와 연결하는 매핑 구조를 세웠습니다.' },
+        { h: '자동화 가능성 검토', p: 'OCR로 영양성분을 추출해 구조화 데이터에 자동으로 반영하는 방안을 검토하고 있습니다.' },
+        { h: '효과 측정 체계', p: '유입 세션, 검색 유입 매출 같은 지표로 적용 효과를 분석하고 측정 체계를 고도화했습니다.' },
+        { h: '적용 범위 조율', p: '개발, 마케팅 등 유관 부서와 요구사항과 적용 범위를 조율했습니다.' },
+      ] },
+      { type: 'flow', title: '데이터가 흐르는 구조', cols: [
+        { h: '서비스 데이터', items: ['상품 정보', '브랜드 정보', '콘텐츠'] },
+        { h: '구조화 데이터 (JSON-LD)', items: ['유형별 데이터 항목 정의', '기존 데이터와 매핑', '운영 정책'] },
+        { h: '생성형 검색 유입', items: ['유입 세션', '검색 유입 매출', '효과 측정 체계'] },
+      ] },
+      { type: 'code', title: '구조화 데이터의 형태', note: '이해를 돕기 위한 예시입니다. 실제 데이터와 항목은 다릅니다.', code: '{\n  "@context": "https://schema.org",\n  "@type": "Product",\n  "name": "상품명",\n  "brand": { "@type": "Brand", "name": "브랜드명" },\n  "description": "상품 설명",\n  "nutrition": { "@type": "NutritionInformation", "calories": "000 kcal" },\n  "offers": { "@type": "Offer", "price": "0000", "priceCurrency": "KRW" }\n}' },
+      { type: 'results', title: '결과', quant: [
+        '구조화 데이터 적용 이후 유입 세션 174% 증가',
+        '검색 유입 기반 매출 153% 증가에 기여',
+      ], qual: [
+        '적용 효과를 지표로 확인하는 측정 체계 마련',
+        '진행 중: OCR 기반 영양성분 추출과 자동화 적용 검토',
+      ] },
+    ],
+  },
+  {
+    slug: 'recommend', no: '02', title: '개인화 추천 서비스', type: 'AI 추천', period: '2023.01 – 2023.08', status: '완료',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '장바구니 분석으로 상품 간 연관 규칙을 찾아, 사람이 고르던 추천 상품을 추천 로직이 고르게 바꿨습니다.',
     role: 'PM · 기획 (본인 1명)', team: '디자인 1 · 프론트엔드 1 · 백엔드 1', contrib: 5,
@@ -43,35 +72,6 @@ window.PROJECTS = [
     ],
   },
   {
-    slug: 'geo', no: '02', title: 'GEO 기반 검색 최적화 체계 구축', type: '검색 · GEO', period: '2026.03 –', status: '진행 중',
-    company: '풀무원 · 식품 D2C 자사몰',
-    summary: '생성형 검색(GEO) 환경에서 AI가 서비스 정보를 정확히 읽을 수 있도록 구조화 데이터를 설계하고, 그 효과를 지표로 확인하는 체계를 만들고 있습니다.',
-    role: '구조화 데이터(JSON-LD) 설계 · 운영 정책 수립', team: '개발 · 마케팅 등 유관 부서와 협업', contrib: 0,
-    kpis: [{ v: '+174%', l: '유입 세션' }, { v: '+153%', l: '검색 유입 기반 매출' }, { v: '3유형', l: '상품 · 브랜드 · 콘텐츠 데이터 정의' }],
-    blocks: [
-      { type: 'steps', title: '어떻게 풀었나', items: [
-        { h: '구조화 데이터 설계', p: '생성형 검색 환경에 대응하기 위해 서비스 정보를 구조화 데이터(JSON-LD)로 설계했습니다.' },
-        { h: '데이터 항목 정의와 매핑', p: '상품, 브랜드, 콘텐츠별로 필요한 데이터 항목을 정의하고, 기존 서비스 데이터와 연결하는 매핑 구조를 세웠습니다.' },
-        { h: '자동화 가능성 검토', p: 'OCR로 영양성분을 추출해 구조화 데이터에 자동으로 반영하는 방안을 검토하고 있습니다.' },
-        { h: '효과 측정 체계', p: '유입 세션, 검색 유입 매출 같은 지표로 적용 효과를 분석하고 측정 체계를 고도화했습니다.' },
-        { h: '적용 범위 조율', p: '개발, 마케팅 등 유관 부서와 요구사항과 적용 범위를 조율했습니다.' },
-      ] },
-      { type: 'flow', title: '데이터가 흐르는 구조', cols: [
-        { h: '서비스 데이터', items: ['상품 정보', '브랜드 정보', '콘텐츠'] },
-        { h: '구조화 데이터 (JSON-LD)', items: ['유형별 데이터 항목 정의', '기존 데이터와 매핑', '운영 정책'] },
-        { h: '생성형 검색 유입', items: ['유입 세션', '검색 유입 매출', '효과 측정 체계'] },
-      ] },
-      { type: 'code', title: '구조화 데이터의 형태', note: '이해를 돕기 위한 예시입니다. 실제 데이터와 항목은 다릅니다.', code: '{\n  "@context": "https://schema.org",\n  "@type": "Product",\n  "name": "상품명",\n  "brand": { "@type": "Brand", "name": "브랜드명" },\n  "description": "상품 설명",\n  "nutrition": { "@type": "NutritionInformation", "calories": "000 kcal" },\n  "offers": { "@type": "Offer", "price": "0000", "priceCurrency": "KRW" }\n}' },
-      { type: 'results', title: '결과', quant: [
-        '구조화 데이터 적용 이후 유입 세션 174% 증가',
-        '검색 유입 기반 매출 153% 증가에 기여',
-      ], qual: [
-        '적용 효과를 지표로 확인하는 측정 체계 마련',
-        '진행 중: OCR 기반 영양성분 추출과 자동화 적용 검토',
-      ] },
-    ],
-  },
-  {
     slug: 'search', no: '03', title: 'AI 하이브리드 검색 엔진 고도화', type: 'AI 검색', period: '2026.01 – 2026.09', status: '완료',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '키워드 검색에 의미 검색을 결합한 하이브리드 검색을 설계하고, 사람이 하던 검색 품질 검수를 자동화 체계로 바꿨습니다.',
@@ -104,52 +104,7 @@ window.PROJECTS = [
     ],
   },
   {
-    slug: 'renewal', no: '04', title: '자사몰 리뉴얼 (PC · Mobile)', type: 'PM', period: '2023.12 – 2024.07', status: '완료',
-    company: '풀무원 · 식품 D2C 자사몰',
-    summary: '사용자 행동 데이터에서 이탈 구간을 찾아 정보 구조와 정책을 다시 설계하고, 30~40명 규모의 리뉴얼을 오픈까지 이끌었습니다.',
-    role: 'PM (본인) · 기획 2명 중 1명', team: '디자인 1 · 프론트엔드 2 · 백엔드 5', contrib: 4,
-    kpis: [{ v: '2배+', l: '페이지 전환율 (CVR)' }, { v: '−30%', l: '이탈률' }, { v: '+160%', l: '카테고리 매출 (최대)' }],
-    blocks: [
-      { type: 'list', title: '배경과 목표', items: [
-        '유입에 비해 장바구니 전환율이 낮고, 상품 상세에서 이탈이 많았습니다.',
-        '정보 구조가 복잡해 원하는 상품을 찾는 데 시간이 걸렸습니다.',
-        'PC와 모바일의 정책이 달라 운영과 관리에 비효율이 있었습니다.',
-      ] },
-      { type: 'steps', title: '어떻게 풀었나', items: [
-        { h: '행동 데이터 분석', p: 'GA와 CRM 데이터로 이탈 구간, 유입 경로, CTA 클릭, 스크롤 패턴을 분석해 개선 방향을 정했습니다.' },
-        { h: '상세 기획과 백로그 관리', p: 'PC·모바일 프론트와 백오피스의 화면 정의서, 정책서를 작성하고 Jira로 백로그를 관리했습니다.' },
-        { h: '웹 접근성 반영', p: '키보드만으로 모든 기능을 쓸 수 있게 하고, 중요한 텍스트는 이미지 대신 웹폰트로 구성해 스크린리더가 읽을 수 있게 했습니다.' },
-        { h: '시나리오 기반 QA', p: '시나리오 중심 테스트 케이스를 작성하고 수행해 오픈 리스크를 줄였고, 운영 매뉴얼을 Confluence에 남겼습니다.' },
-      ] },
-      { type: 'compare', title: '전후 비교', items: [
-        { l: '페이지 전환율', before: '1~2%', after: '5% 이상', bn: '2022년', an: '2023~24년' },
-        { l: '이탈률', before: '평균 40%', after: '평균 28%', bn: 'Before', an: 'After' },
-      ] },
-      { type: 'figures', title: '메인 화면', layout: 'pair', items: [
-        { src: 'assets/img/renew-asis.jpg', cap: 'AS-IS' },
-        { src: 'assets/img/renew-tobe.jpg', cap: '리뉴얼 후' },
-      ] },
-      { type: 'figures', title: '웹 접근성 적용', layout: 'three', items: [
-        { src: 'assets/img/renew-a11y-1.jpg', cap: '이미지 텍스트에 대체 텍스트 제공' },
-        { src: 'assets/img/renew-a11y-2.jpg', cap: '가독성 좋은 텍스트 처리' },
-        { src: 'assets/img/renew-a11y-3.jpg', cap: '이벤트 배너 대체 텍스트' },
-      ] },
-      { type: 'figures', title: '기획 산출물', layout: 'wide', items: [
-        { blur: true, src: 'assets/img/renew-storyboard.jpg', cap: '화면 정의서와 정책서' },
-      ] },
-      { type: 'results', title: '결과', quant: [
-        '페이지 전환율(CVR) 2배 이상',
-        '이탈률 30% 감소',
-        '카테고리별 매출 최대 160% 신장',
-        '공통 가이드 적용으로 신규 기능 추가 시 디자인·개발 공수 10% 절감',
-      ], qual: [
-        '체계적인 테스트 케이스와 QA로 오픈 후 Critical 이슈 0건',
-        '실무 20명, 유관 부서 포함 30~40명의 이해관계자 조율과 일정 관리',
-      ] },
-    ],
-  },
-  {
-    slug: 'cms', no: '05', title: '상품 CMS 구축과 GEO 대응 고도화', type: '백오피스', period: '2024.08 – 12 · 2026.07 – 09', status: '완료',
+    slug: 'cms', no: '04', title: '상품 CMS 구축과 GEO 대응 고도화', type: '백오피스', period: '2024.08 – 12 · 2026.07 – 09', status: '완료',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '사람이 손으로 만들던 상품 상세 페이지를 코딩 없이 조립하는 에디터로 바꾸고, 2026년에는 AI가 읽기 좋은 콘텐츠를 만들 수 있게 고도화했습니다.',
     role: 'PM · 기획 (본인 1명)', team: '디자인 1 · 프론트엔드 1 · 백엔드 1', contrib: 5,
@@ -193,6 +148,51 @@ window.PROJECTS = [
         '대규모 상품 정보의 데이터 무결성과 품질 일관성 확보',
         '실무자 사이의 커뮤니케이션 오류 감소',
         '2026년: GEO 대응과 시각적 편집 사용성을 반영해 작성·운영 체계 고도화',
+      ] },
+    ],
+  },
+  {
+    slug: 'renewal', no: '05', title: '자사몰 리뉴얼 (PC · Mobile)', type: 'PM', period: '2023.12 – 2024.07', status: '완료',
+    company: '풀무원 · 식품 D2C 자사몰',
+    summary: '사용자 행동 데이터에서 이탈 구간을 찾아 정보 구조와 정책을 다시 설계하고, 30~40명 규모의 리뉴얼을 오픈까지 이끌었습니다.',
+    role: 'PM (본인) · 기획 2명 중 1명', team: '디자인 1 · 프론트엔드 2 · 백엔드 5', contrib: 4,
+    kpis: [{ v: '2배+', l: '페이지 전환율 (CVR)' }, { v: '−30%', l: '이탈률' }, { v: '+160%', l: '카테고리 매출 (최대)' }],
+    blocks: [
+      { type: 'list', title: '배경과 목표', items: [
+        '유입에 비해 장바구니 전환율이 낮고, 상품 상세에서 이탈이 많았습니다.',
+        '정보 구조가 복잡해 원하는 상품을 찾는 데 시간이 걸렸습니다.',
+        'PC와 모바일의 정책이 달라 운영과 관리에 비효율이 있었습니다.',
+      ] },
+      { type: 'steps', title: '어떻게 풀었나', items: [
+        { h: '행동 데이터 분석', p: 'GA와 CRM 데이터로 이탈 구간, 유입 경로, CTA 클릭, 스크롤 패턴을 분석해 개선 방향을 정했습니다.' },
+        { h: '상세 기획과 백로그 관리', p: 'PC·모바일 프론트와 백오피스의 화면 정의서, 정책서를 작성하고 Jira로 백로그를 관리했습니다.' },
+        { h: '웹 접근성 반영', p: '키보드만으로 모든 기능을 쓸 수 있게 하고, 중요한 텍스트는 이미지 대신 웹폰트로 구성해 스크린리더가 읽을 수 있게 했습니다.' },
+        { h: '시나리오 기반 QA', p: '시나리오 중심 테스트 케이스를 작성하고 수행해 오픈 리스크를 줄였고, 운영 매뉴얼을 Confluence에 남겼습니다.' },
+      ] },
+      { type: 'compare', title: '전후 비교', items: [
+        { l: '페이지 전환율', before: '1~2%', after: '5% 이상', bn: '2022년', an: '2023~24년' },
+        { l: '이탈률', before: '평균 40%', after: '평균 28%', bn: 'Before', an: 'After' },
+      ] },
+      { type: 'figures', title: '메인 화면', layout: 'pair', items: [
+        { src: 'assets/img/renew-asis.jpg', cap: 'AS-IS' },
+        { src: 'assets/img/renew-tobe.jpg', cap: '리뉴얼 후' },
+      ] },
+      { type: 'figures', title: '웹 접근성 적용', layout: 'three', items: [
+        { src: 'assets/img/renew-a11y-1.jpg', cap: '이미지 텍스트에 대체 텍스트 제공' },
+        { src: 'assets/img/renew-a11y-2.jpg', cap: '가독성 좋은 텍스트 처리' },
+        { src: 'assets/img/renew-a11y-3.jpg', cap: '이벤트 배너 대체 텍스트' },
+      ] },
+      { type: 'figures', title: '기획 산출물', layout: 'wide', items: [
+        { blur: true, src: 'assets/img/renew-storyboard.jpg', cap: '화면 정의서와 정책서' },
+      ] },
+      { type: 'results', title: '결과', quant: [
+        '페이지 전환율(CVR) 2배 이상',
+        '이탈률 30% 감소',
+        '카테고리별 매출 최대 160% 신장',
+        '공통 가이드 적용으로 신규 기능 추가 시 디자인·개발 공수 10% 절감',
+      ], qual: [
+        '체계적인 테스트 케이스와 QA로 오픈 후 Critical 이슈 0건',
+        '실무 20명, 유관 부서 포함 30~40명의 이해관계자 조율과 일정 관리',
       ] },
     ],
   },
