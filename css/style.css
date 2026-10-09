@@ -302,3 +302,11 @@ h1{white-space:pre-line;font-size:clamp(34px,4.6vw,62px);font-weight:900;letter-
   .cmp-l{grid-column:1 / -1}
   .spec>div{grid-template-columns:84px 1fr}
 }
+
+/* 코드 예시 · 예상치 표시 · 눌러서 이동하는 Now 카드 */
+.code{background:var(--ink);color:#E9E6DD;font-size:13px;line-height:1.8;padding:20px 22px;overflow-x:auto;white-space:pre}
+.code-note{font-size:12px;color:var(--sub);padding:10px 22px;border-top:var(--b)}
+.rs.sm{font-size:13px}
+.est{display:block;font-size:10px;font-weight:700;color:var(--sub);letter-spacing:0}
+a.job{display:block;transition:transform .2s,box-shadow .2s}
+a.job:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
