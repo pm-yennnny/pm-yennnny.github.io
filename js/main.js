@@ -27,6 +27,8 @@ onceVisible(document.getElementById('bars'), box => {
 
 // ── 전환 로그: 경력 순서대로 한 줄씩 쌓인다 ──
 const LOG = [
+  ['2016', '전용 플레이어 앱', '결제 전환율 +5%'],
+  ['2017', '신규 카테고리 서비스', '매출 300%'],
   ['2019', '쿠폰 발송 자동화', '매출 4억'],
   ['2020', '파트너 정산 자동화', '운영비 −5%'],
   ['2021', '글로벌 앱 런칭 TH·TW', '회원 20만'],
@@ -89,7 +91,7 @@ addEventListener('resize', spy);
 spy();
 
 // ── 섹션 등장 모션 ──
-document.querySelectorAll('.sh, .panel, .kpi, .wk, .box').forEach(el => {
+document.querySelectorAll('.sh, .panel, .kpi, .box').forEach(el => {
   if (el.closest('#overview') && !el.closest('.two')) return; // 첫 화면은 바로 보인다
   el.classList.add('rv');
   onceVisible(el, () => el.classList.add('in'), 0.12);
