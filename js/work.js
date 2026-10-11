@@ -15,6 +15,7 @@ const BLOCK = {
   compare: b => `<div class="cmp${b.small ? ' sm' : ''}">${b.items.map(c => `<div class="cmp-row"><p class="cmp-l">${esc(c.l)}</p><div class="cmp-b"><small class="mono">${esc(c.bn)}</small><b>${esc(c.before)}</b></div><span class="cmp-ar">→</span><div class="cmp-a"><small class="mono">${esc(c.an)}</small><b>${esc(c.after)}</b></div></div>`).join('')}</div>`,
   figures: b => `<div class="figs ${b.layout}">${b.items.map(fig).join('')}</div>`,
   results: b => `<div class="res2"><div><h3>정량 성과</h3><ul class="dash">${li(b.quant)}</ul></div><div><h3>정성 성과</h3><ul class="dash">${li(b.qual)}</ul></div></div>`,
+  table: b => `<div class="tbl" style="--grid:${b.grid || `repeat(${b.head.length},1fr)`}"><div class="tbl-h mono">${b.head.map(h => `<span>${esc(h)}</span>`).join('')}</div>${b.rows.map(r => `<div class="tbl-r">${r.map((c, i) => `<span data-h="${esc(b.head[i])}">${esc(c)}</span>`).join('')}</div>`).join('')}</div>${b.note ? `<p class="code-note">${esc(b.note)}</p>` : ''}`,
   code: b => `<pre class="code mono"><code>${esc(b.code)}</code></pre>${b.note ? `<p class="code-note">${esc(b.note)}</p>` : ''}`,
   todo: b => `<p class="todo mono">${esc(b.text)}</p>`,
 };
