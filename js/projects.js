@@ -3,7 +3,7 @@
 // blocks 종류: list(목록) · steps(번호 단계) · chips(꼬리표) · flow(흐름 3단) · compare(전후 비교) · figures(이미지) · code(코드 예시) · results(성과) · todo(준비 중 안내)
 window.PROJECTS = [
   {
-    slug: 'geo', no: '01', title: 'GEO 기반 검색 최적화 체계 구축', type: '검색 · GEO', period: '2026.03 –', status: '진행 중',
+    slug: 'geo', no: '01', title: 'GEO 기반 검색 최적화 체계 구축', type: '검색 · GEO', period: '2026.03 – 2026.12 (예정)', status: '진행 중',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '생성형 검색(GEO) 환경에서 AI가 서비스 정보를 정확히 읽을 수 있도록 구조화 데이터를 설계하고, 그 효과를 지표로 확인하는 체계를 만들고 있습니다.',
     role: '구조화 데이터(JSON-LD) 설계 · 운영 정책 수립', team: '개발 · 마케팅 등 유관 부서와 협업', contrib: 0,
