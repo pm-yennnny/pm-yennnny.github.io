@@ -384,3 +384,11 @@ a.job:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
 .build.nolink:hover{transform:none;box-shadow:none}
 .build.nolink:hover .art{background:var(--bg)}
 .art.flow.wrap{flex-wrap:wrap;gap:6px;align-content:center}
+
+/* Lab 카드 그림 (직접 그린 도식) */
+.art.pic{padding:12px 16px}
+.art.pic svg{width:100%;max-width:330px;height:auto;display:block}
+.art.pic .i{fill:var(--ink)}.art.pic .a{fill:var(--accent)}.art.pic .w{fill:#fff}.art.pic .g{fill:#CFCABD}
+.art.pic .st{stroke:var(--ink);stroke-width:2}.art.pic .st1{stroke:var(--ink);stroke-width:1.5}
+.art.pic text{font-size:9px;font-weight:800;text-anchor:middle;fill:var(--ink)}
+.art.pic text.tb{font-size:11px}.art.pic text.tw{fill:#fff}
