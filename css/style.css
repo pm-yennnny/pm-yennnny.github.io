@@ -359,3 +359,6 @@ a.job:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
 
 /* 전후 비교에 숫자가 아니라 문장이 들어갈 때 */
 .cmp.sm b{font-size:16px;font-weight:800;letter-spacing:-.02em;line-height:1.4;display:block;margin-top:2px}
+
+/* 첫 화면 소개 문구는 세 줄로 보이도록 폭 제한을 푼다 (좁은 화면에서는 자연스럽게 줄바꿈) */
+#overview .lead{max-width:none}
