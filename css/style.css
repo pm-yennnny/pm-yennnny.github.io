@@ -216,7 +216,7 @@ h1{white-space:pre-line;font-size:clamp(34px,4.6vw,62px);font-weight:900;letter-
 #nav .sub a{justify-content:flex-start;gap:8px;padding:6px 8px;font-size:12.5px;font-weight:600;border-width:1.5px;line-height:1.35}
 #nav .sub a span{font-size:10px;opacity:.6}
 #nav .sub a.on{background:var(--accent);color:var(--ink);border-color:var(--ink)}
-.d-head>p{font-size:12px;color:var(--sub);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.d-head>p.mono{font-size:12px;color:var(--sub);display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .d-head h1{font-size:clamp(30px,4vw,52px)}
 .d-top{display:grid;grid-template-columns:1fr 1.25fr;gap:14px;margin:32px 0 0}
 .spec>div{display:grid;grid-template-columns:104px 1fr;gap:12px;padding:12px 18px;border-bottom:1.5px solid var(--line);font-size:14px;font-weight:600}
