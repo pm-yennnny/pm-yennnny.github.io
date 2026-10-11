@@ -23,8 +23,10 @@ document.querySelectorAll('.v[data-n]').forEach(el => onceVisible(el, () => {
 // ── 층별 막대와 프로젝트 로그 ──
 // 왼쪽: 서비스의 어느 층까지 설계했는지(13건 중 몇 건). 오른쪽: 프로젝트 로그.
 // 층을 누르면 로그가 그 층을 설계한 프로젝트만 남기고, 설명을 "그 층에서 한 일"로 바꾼다.
+// 맨 위 "전체"가 처음부터 선택되어 있어, 나머지 줄도 고를 수 있다는 것을 문구 없이 알린다.
 // 성과 수치는 위쪽 카드와 대표 프로젝트에 이미 있으므로 여기서는 반복하지 않는다.
 const LAYERS = [
+  ['', '전체'],
   ['s', '고객이 보는 화면'],
   ['l', '서비스 로직'],
   ['d', '데이터 분석 · 연동'],
@@ -50,9 +52,7 @@ const LOG = [
 const layersBox = document.getElementById('layers');
 const logBox = document.getElementById('log');
 const logHead = document.getElementById('log-head');
-const layerHint = document.getElementById('layer-hint');
-const layerReset = document.getElementById('layer-reset');
-let curLayer = null;   // 선택한 층 (없으면 전체 로그)
+let curLayer = null;   // 선택한 층 (null이면 전체)
 let typing = false;    // 처음 한 줄씩 쌓이는 중인지
 
 const logLine = (row, text) => `<span class="y">${row[0]}</span> ${row[1]} <span class="y">·</span> <b>${text}</b> `;
@@ -65,28 +65,25 @@ function renderLog() {
   logBox.lastElementChild?.classList.add('cur');
 }
 function setLayer(key) {
-  curLayer = key;
+  curLayer = key || null;
   layersBox.querySelectorAll('.lyr').forEach(b => {
-    const on = b.dataset.k === key;
+    const on = (b.dataset.k || null) === curLayer;
     b.classList.toggle('on', on);
     b.setAttribute('aria-pressed', on);
   });
-  const name = key ? LAYERS.find(l => l[0] === key)[1] : '';
-  logHead.textContent = key ? '이 층에서 한 일' : '무엇을 · 어떤 역할로';
-  layerHint.textContent = key ? `${name} · ${LOG.filter(r => r[3][key]).length}건` : '층을 누르면 프로젝트 로그가 바뀝니다';
-  layerReset.hidden = !key;
+  logHead.textContent = LAYERS.find(l => (l[0] || null) === curLayer)[1];
   renderLog();
 }
 if (layersBox) {
   layersBox.innerHTML = LAYERS.map(([k, name]) => {
-    const n = LOG.filter(r => r[3][k]).length;
-    return `<button class="lyr" data-k="${k}" aria-pressed="false"><span>${name}</span><span class="tr"><i data-w="${Math.round(n / LOG.length * 100)}"></i></span><span class="n">${n}건</span></button>`;
+    const n = k ? LOG.filter(r => r[3][k]).length : LOG.length;
+    return `<button class="lyr${k ? '' : ' on'}" data-k="${k}" aria-pressed="${!k}"><span>${name}</span><span class="tr"><i data-w="${Math.round(n / LOG.length * 100)}"></i></span><span class="n">${n}건</span><span class="ch" aria-hidden="true">›</span></button>`;
   }).join('');
+  // 고른 층을 다시 누르면 전체로 돌아간다.
   layersBox.addEventListener('click', e => {
     const b = e.target.closest('.lyr');
-    if (b) setLayer(curLayer === b.dataset.k ? null : b.dataset.k);
+    if (b) setLayer(curLayer === (b.dataset.k || null) ? null : b.dataset.k);
   });
-  layerReset.addEventListener('click', () => setLayer(null));
   onceVisible(layersBox, box => {
     box.querySelectorAll('.tr i').forEach(i => { i.style.width = i.dataset.w + '%'; });
   });
