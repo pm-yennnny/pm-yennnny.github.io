@@ -204,6 +204,11 @@ h1{white-space:pre-line;font-size:clamp(34px,4.6vw,62px);font-weight:900;letter-
   .cta{padding:32px 22px 36px}
   .cta h2{font-size:21px;font-weight:700;letter-spacing:-.03em;line-height:1.5;margin:12px 0 26px}
 }
+/* 첫 화면 수치 카드: 누르면 해당 프로젝트로 이동 */
+a.kpi{display:block;color:inherit}
+.kpi .go{margin-left:6px;font-weight:900;display:inline-block;transition:transform .2s}
+a.kpi:hover .go,a.kpi.lit .go{transform:translateX(4px)}
+
 /* "동작 줄이기"를 켠 경우: 위치가 움직이는 효과만 뺀다.
    숫자 올라가기, 로그 쌓이기, 색·그림자 변화, 서서히 나타나기는 그대로 둔다. */
 @media(prefers-reduced-motion:reduce){
@@ -459,5 +464,5 @@ a.job.lit,.build.lit{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--i
 @media(prefers-reduced-motion:reduce){
   .kpi:hover,.kpi.lit,.build:hover,.build.lit,a.job:hover,a.job.lit,.box:hover,.box.lit,
   .pn a:hover,.pn a.lit,.copy:hover,.top nav a:hover,
-  .wk:hover .ar,.wk.lit .ar,.lyr:hover .ch,.lyr.on .ch,.tr-row:hover .ar{transform:none}
+  .wk:hover .ar,.wk.lit .ar,a.kpi:hover .go,a.kpi.lit .go,.lyr:hover .ch,.lyr.on .ch,.tr-row:hover .ar{transform:none}
 }
