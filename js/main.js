@@ -182,4 +182,4 @@ function litOnScroll(selector) {
   }, { rootMargin: '-45% 0px -45% 0px' });   // 화면 세로 가운데 10% 띠
   document.querySelectorAll(selector).forEach(el => io.observe(el));
 }
-litOnScroll('.kpi, .wk, a.job, a.build, .box');
+litOnScroll('.kpi, .wk, a.job, a.build');  // '다루는 것' 박스는 스크롤 효과 없음
