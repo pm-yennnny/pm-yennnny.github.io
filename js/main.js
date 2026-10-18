@@ -150,14 +150,39 @@ if (navWork && subBox && window.PROJECTS) {
 const links = [...document.querySelectorAll('#nav a')];
 const crumb = document.getElementById('crumb');
 const sections = [...document.querySelectorAll('section[id]')];
-function spy() {
+// 메뉴를 눌러 이동하는 동안에는 지나가는 섹션마다 메뉴가 검게 깜빡이지 않도록,
+// 누른 메뉴만 켜 두었다가 목적지에 도착하면(또는 손으로 스크롤을 시작하면) 원래대로 돌아간다.
+let jumpTo = null, jumpTimer;
+function release() { jumpTo = null; clearTimeout(jumpTimer); spy(); }
+function hold() { clearTimeout(jumpTimer); jumpTimer = setTimeout(release, 1000); }  // 도착을 못 알아챈 경우의 안전장치
+links.forEach(a => a.addEventListener('click', () => {
+  const href = a.getAttribute('href') || '';
+  const target = href.startsWith('#') && sections.find(s => s.id === href.slice(1));
+  if (!target) return;
+  jumpTo = target;
+  mark(target);
+  hold();
+}));
+['touchstart', 'wheel'].forEach(t => addEventListener(t, () => { if (jumpTo) release(); }, { passive: true }));
+function mark(cur) {
+  links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + cur.id));
+  crumb.textContent = cur.dataset.name;
+}
+function current() {
   const line = innerHeight * 0.35;
   let cur = sections[0];
   for (const s of sections) if (s.getBoundingClientRect().top <= line) cur = s;
   // 맨 아래에 닿으면 마지막 섹션으로 본다.
   if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = sections[sections.length - 1];
-  links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + cur.id));
-  crumb.textContent = cur.dataset.name;
+  return cur;
+}
+function spy() {
+  const cur = current();
+  if (jumpTo) {
+    if (cur !== jumpTo) return hold();
+    jumpTo = null; clearTimeout(jumpTimer);
+  }
+  mark(cur);
   // 프로젝트 목록을 열어 둔 채 Work 영역을 벗어나면 저절로 닫는다.
   if (subOpen) {
     if (cur.id === 'work') enteredWork = true;
