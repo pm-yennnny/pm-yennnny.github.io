@@ -253,6 +253,13 @@ a.kpi:hover .go,a.kpi.lit .go{transform:translateX(4px)}
 .steps p{font-size:15px;color:var(--sub);margin-top:4px;max-width:46em}
 .chips.pad{padding:20px 22px}
 .flow3{display:grid;grid-template-columns:repeat(3,1fr)}
+.flow3.c4{grid-template-columns:repeat(4,1fr)}
+/* 한 프로젝트 안에서 단계(예: 2024 V1, 2026 V2)를 나누는 구분선 */
+.phase{margin:88px 0 0;padding-top:24px;border-top:var(--b)}
+.phase .tag{display:inline-block;background:var(--accent);border:1.5px solid var(--ink);border-radius:99px;padding:3px 12px;font-size:12px;font-weight:700}
+.phase h2{font-size:clamp(26px,3.2vw,38px);letter-spacing:-.04em;margin-top:12px}
+.phase p{font-size:15px;color:var(--sub);margin-top:6px}
+.phase+.blk{margin-top:32px}
 .flow3>div{padding:20px 22px;border-right:1.5px solid var(--line);position:relative}
 .flow3>div:last-child{border-right:0}
 .flow3>div:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:18px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;z-index:1}
@@ -299,7 +306,7 @@ a.kpi:hover .go,a.kpi.lit .go{transform:translateX(4px)}
 .lb button{position:absolute;top:14px;right:18px;border:2px solid var(--bg);border-radius:99px;background:none;color:var(--bg);padding:6px 14px;font-size:13px;font-weight:800}
 @media(max-width:1080px){
   .d-top,.figs.phones{grid-template-columns:1fr}
-  .flow3,.res2{grid-template-columns:1fr}
+  .flow3,.flow3.c4,.res2{grid-template-columns:1fr}
   .flow3>div{border-right:0;border-bottom:1.5px solid var(--line)}
   .flow3>div:last-child{border-bottom:0}
   .flow3>div:not(:last-child)::after{display:none}
