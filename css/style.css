@@ -204,11 +204,15 @@ h1{white-space:pre-line;font-size:clamp(34px,4.6vw,62px);font-weight:900;letter-
   .cta{padding:32px 22px 36px}
   .cta h2{font-size:21px;font-weight:700;letter-spacing:-.03em;line-height:1.5;margin:12px 0 26px}
 }
+/* "동작 줄이기"를 켠 경우: 위치가 움직이는 효과만 뺀다.
+   숫자 올라가기, 로그 쌓이기, 색·그림자 변화, 서서히 나타나기는 그대로 둔다. */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *,*::before,*::after{animation:none!important;transition:none!important}
-  .rv{opacity:1;transform:none}
+  .rv{transform:none}
+  .log p{animation-name:fadein}
+  .ok i,.log .cur::after,.st.run::before{animation:none}
 }
+@keyframes fadein{from{opacity:0}}
 
 /* ───────── 프로젝트 상세 (work.html) ───────── */
 .bar a:hover{text-decoration:underline}
@@ -449,4 +453,11 @@ a.job.lit,.build.lit{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--i
 /* 누르는 순간의 반응 */
 @media(hover:none){
   .wk:active,.kpi:active,a.job:active,a.build:active,.box:active,.pn a:active{transform:translate(0,0);box-shadow:none}
+}
+
+/* "동작 줄이기": 마우스 올림·화면 가운데 효과에서 떠오르는 움직임만 뺀다 (맨 뒤에 두어야 앞의 규칙을 덮는다) */
+@media(prefers-reduced-motion:reduce){
+  .kpi:hover,.kpi.lit,.build:hover,.build.lit,a.job:hover,a.job.lit,.box:hover,.box.lit,
+  .pn a:hover,.pn a.lit,.copy:hover,.top nav a:hover,
+  .wk:hover .ar,.wk.lit .ar,.lyr:hover .ch,.lyr.on .ch,.tr-row:hover .ar{transform:none}
 }

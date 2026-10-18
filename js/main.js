@@ -1,9 +1,10 @@
-const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// "동작 줄이기"를 켠 사람에게도 숫자, 로그, 색 변화는 그대로 보여준다.
+// 화면 요소의 위치가 움직이는 효과만 css에서 뺀다 (어지러움을 일으키는 것은 위치 이동이기 때문).
 
 // 화면에 들어올 때 한 번만 실행한다.
 function onceVisible(el, fn, threshold = 0.3) {
   if (!el) return;
-  if (calm || !('IntersectionObserver' in window)) return fn(el);
+  if (!('IntersectionObserver' in window)) return fn(el);
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { io.disconnect(); fn(el); } });
   }, { threshold });
@@ -12,7 +13,7 @@ function onceVisible(el, fn, threshold = 0.3) {
 
 // ── 수치 카운트업 ──
 document.querySelectorAll('.v[data-n]').forEach(el => onceVisible(el, () => {
-  const n = +el.dataset.n, dur = calm ? 0 : 1300, t0 = performance.now();
+  const n = +el.dataset.n, dur = 1300, t0 = performance.now();
   (function tick(t) {
     const k = dur ? Math.min((t - t0) / dur, 1) : 1;
     el.textContent = el.dataset.p + Math.round(n * (1 - Math.pow(1 - k, 3))) + el.dataset.s;
@@ -100,7 +101,7 @@ onceVisible(logBox, () => {
     p.className = 'cur';
     p.innerHTML = logLine(LOG[i], LOG[i][2]);
     logBox.append(p);
-    if (++i < LOG.length) calm ? next() : setTimeout(next, 600);
+    if (++i < LOG.length) setTimeout(next, 600);
     else typing = false;
   })();
 });
@@ -175,7 +176,7 @@ document.querySelectorAll('.sh, .panel, .kpi, .box').forEach(el => {
 
 // ── 터치 화면에서도 PC처럼: 마우스를 올릴 수 없으니, 화면 가운데를 지나는 카드에 같은 효과를 준다 ──
 function litOnScroll(selector) {
-  if (calm || !matchMedia('(hover: none)').matches || !('IntersectionObserver' in window)) return;
+  if (!matchMedia('(hover: none)').matches || !('IntersectionObserver' in window)) return;
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => e.target.classList.toggle('lit', e.isIntersecting));
   }, { rootMargin: '-45% 0px -45% 0px' });   // 화면 세로 가운데 10% 띠

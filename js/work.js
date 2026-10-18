@@ -81,7 +81,7 @@ document.querySelectorAll('.copy').forEach(btn => {
 
 // ── 터치 화면에서도 PC처럼: 마우스를 올릴 수 없으니, 화면 가운데를 지나는 카드에 같은 효과를 준다 ──
 function litOnScroll(selector) {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !matchMedia('(hover: none)').matches || !('IntersectionObserver' in window)) return;
+  if (!matchMedia('(hover: none)').matches || !('IntersectionObserver' in window)) return;
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => e.target.classList.toggle('lit', e.isIntersecting));
   }, { rootMargin: '-45% 0px -45% 0px' });   // 화면 세로 가운데 10% 띠
