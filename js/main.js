@@ -125,6 +125,25 @@ document.querySelectorAll('.copy').forEach(btn => {
   });
 });
 
+// ── 메뉴의 Work를 누르면 그 아래에 프로젝트 목록이 열린다 ──
+// 스크롤만 할 때는 열리지 않는다. 다시 누르거나 Work 영역을 벗어나면 닫힌다.
+const navWork = document.getElementById('nav-work');
+const subBox = document.getElementById('sub');
+let subOpen = false;      // 목록이 열려 있는지
+let enteredWork = false;  // 연 뒤에 Work 영역에 들어온 적이 있는지
+function setSub(open) {
+  subOpen = open;
+  enteredWork = false;
+  subBox.classList.toggle('open', open);
+  navWork.classList.toggle('open', open);
+  navWork.setAttribute('aria-expanded', open);
+}
+if (navWork && subBox && window.PROJECTS) {
+  subBox.innerHTML = window.PROJECTS.map(p =>
+    `<a href="work.html?p=${p.slug}"><span class="mono">${p.no}</span>${p.title}</a>`).join('');
+  navWork.addEventListener('click', () => setSub(!subOpen));  // 영역으로 이동하는 기본 동작은 그대로 둔다
+}
+
 // ── 현재 보고 있는 섹션을 메뉴와 상단 경로에 표시 ──
 const links = [...document.querySelectorAll('#nav a')];
 const crumb = document.getElementById('crumb');
@@ -137,6 +156,11 @@ function spy() {
   if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = sections[sections.length - 1];
   links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + cur.id));
   crumb.textContent = cur.dataset.name;
+  // 프로젝트 목록을 열어 둔 채 Work 영역을 벗어나면 저절로 닫는다.
+  if (subOpen) {
+    if (cur.id === 'work') enteredWork = true;
+    else if (enteredWork) setSub(false);
+  }
 }
 addEventListener('scroll', spy, { passive: true });
 addEventListener('resize', spy);
@@ -148,3 +172,13 @@ document.querySelectorAll('.sh, .panel, .kpi, .box').forEach(el => {
   el.classList.add('rv');
   onceVisible(el, () => el.classList.add('in'), 0.12);
 });
+
+// ── 터치 화면에서도 PC처럼: 마우스를 올릴 수 없으니, 화면 가운데를 지나는 카드에 같은 효과를 준다 ──
+function litOnScroll(selector) {
+  if (calm || !matchMedia('(hover: none)').matches || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => e.target.classList.toggle('lit', e.isIntersecting));
+  }, { rootMargin: '-45% 0px -45% 0px' });   // 화면 세로 가운데 10% 띠
+  document.querySelectorAll(selector).forEach(el => io.observe(el));
+}
+litOnScroll('.kpi, .wk, a.job, a.build, .box');

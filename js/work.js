@@ -5,7 +5,8 @@ const idx = Math.max(0, list.findIndex(p => p.slug === slug));
 const P = list[idx];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const li = items => items.map(t => `<li>${esc(t)}</li>`).join('');
-const fig = f => `<figure><button class="zoom" data-src="${f.src}" aria-label="${esc(f.cap)} 크게 보기"><img src="${f.src}" alt="${esc(f.cap)}" loading="lazy"></button><figcaption>${esc(f.cap)}${f.blur ? '<span class="bl">내부 자료 · 흐림 처리</span>' : ''}</figcaption>${f.notes ? `<ul class="dash">${li(f.notes)}</ul>` : ''}</figure>`;
+// 흐림 처리한 이미지(blur)는 확대해도 보이는 것이 없으므로 누를 수 없게 그린다.
+const fig = f => `<figure>${[].concat(f.src).map(src => f.blur ? `<div class="zoom still"><img src="${src}" alt="${esc(f.cap)}" loading="lazy"></div>` : `<button class="zoom" data-src="${src}" aria-label="${esc(f.cap)} 크게 보기"><img src="${src}" alt="${esc(f.cap)}" loading="lazy"></button>`).join('')}<figcaption>${esc(f.cap)}${f.blur ? '<span class="bl">내부 자료 · 흐림 처리</span>' : ''}</figcaption>${f.notes ? `<ul class="dash">${f.notes.map(n => typeof n === 'string' ? `<li>${esc(n)}</li>` : `<li><b>${esc(n.h)}</b>${esc(n.p)}</li>`).join('')}</ul>` : ''}</figure>`;
 
 const BLOCK = {
   list: b => `<ul class="dash big">${li(b.items)}</ul>`,
@@ -13,7 +14,7 @@ const BLOCK = {
   chips: b => `<div class="chips pad">${b.items.map(t => `<i>${esc(t)}</i>`).join('')}</div>`,
   flow: b => `<div class="flow3${b.plain ? ' plain' : ''}">${b.cols.map((c, i) => `<div><h3><span class="mono">${i + 1}</span>${esc(c.h)}</h3><ul class="dash">${li(c.items)}</ul></div>`).join('')}</div>`,
   compare: b => `<div class="cmp${b.small ? ' sm' : ''}">${b.items.map(c => `<div class="cmp-row"><p class="cmp-l">${esc(c.l)}</p><div class="cmp-b"><small class="mono">${esc(c.bn)}</small><b>${esc(c.before)}</b></div><span class="cmp-ar">→</span><div class="cmp-a"><small class="mono">${esc(c.an)}</small><b>${esc(c.after)}</b></div></div>`).join('')}</div>`,
-  figures: b => `<div class="figs ${b.layout}">${b.items.map(fig).join('')}</div>`,
+  figures: b => `<div class="figs ${b.layout}${b.nobg ? ' nobg' : ''}${b.same ? ' same' : ''}"${b.ratio ? ` style="--ar:${b.ratio}"` : ''}>${b.items.map(fig).join('')}</div>`,
   results: b => `<div class="res2"><div><h3>정량 성과</h3><ul class="dash">${li(b.quant)}</ul></div><div><h3>정성 성과</h3><ul class="dash">${li(b.qual)}</ul></div></div>`,
   table: b => `<div class="tbl" style="--grid:${b.grid || `repeat(${b.head.length},1fr)`}"><div class="tbl-h mono">${b.head.map(h => `<span>${esc(h)}</span>`).join('')}</div>${b.rows.map(r => `<div class="tbl-r">${r.map((c, i) => `<span data-h="${esc(b.head[i])}">${esc(c)}</span>`).join('')}</div>`).join('')}</div>${b.note ? `<p class="code-note">${esc(b.note)}</p>` : ''}`,
   code: b => `<pre class="code mono"><code>${esc(b.code)}</code></pre>${b.note ? `<p class="code-note">${esc(b.note)}</p>` : ''}`,
@@ -42,7 +43,7 @@ function render() {
       </dl>
       <div class="d-kpis">${P.kpis.map((k, i) => `<div class="kpi${i ? '' : ' pt'}"><p class="v">${esc(k.v)}</p><p class="l">${esc(k.l)}</p></div>`).join('')}</div>
     </div>
-    ${P.blocks.map(b => `<section class="blk">${b.title ? `<div class="sh"><h2>${esc(b.title)}</h2></div>` : ''}<div class="panel${b.type === 'figures' || b.type === 'todo' ? ' bare' : ''}">${BLOCK[b.type](b)}</div></section>`).join('')}
+    ${P.blocks.map(b => `<section class="blk${b.title ? '' : ' cont'}">${b.title ? `<div class="sh"><h2>${esc(b.title)}</h2></div>` : ''}<div class="panel${b.type === 'figures' || b.type === 'todo' ? ' bare' : ''}">${BLOCK[b.type](b)}</div></section>`).join('')}
     <nav class="pn">
       <a class="panel" href="work.html?p=${prev.slug}"><small class="mono">← 이전 · ${prev.no}</small><b>${esc(prev.title)}</b></a>
       <a class="panel" href="work.html?p=${next.slug}"><small class="mono">다음 · ${next.no} →</small><b>${esc(next.title)}</b></a>
@@ -57,7 +58,7 @@ if (P) render();
 // 이미지 크게 보기
 const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
 document.addEventListener('click', e => {
-  const z = e.target.closest('.zoom');
+  const z = e.target.closest('button.zoom');
   if (z) { lbImg.src = z.dataset.src; lbImg.alt = z.querySelector('img').alt; lb.hidden = false; lb.querySelector('button').focus(); }
   else if (e.target.closest('#lb')) lb.hidden = true;
 });
@@ -77,3 +78,13 @@ document.querySelectorAll('.copy').forEach(btn => {
     }
   });
 });
+
+// ── 터치 화면에서도 PC처럼: 마우스를 올릴 수 없으니, 화면 가운데를 지나는 카드에 같은 효과를 준다 ──
+function litOnScroll(selector) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !matchMedia('(hover: none)').matches || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => e.target.classList.toggle('lit', e.isIntersecting));
+  }, { rootMargin: '-45% 0px -45% 0px' });   // 화면 세로 가운데 10% 띠
+  document.querySelectorAll(selector).forEach(el => io.observe(el));
+}
+litOnScroll('.pn a');
