@@ -188,10 +188,13 @@ h1{white-space:pre-line;font-size:clamp(34px,4.6vw,62px);font-weight:900;letter-
   body{display:block}
   /* 휴대폰에서는 메뉴를 누르면 미끄러지지 않고 바로 이동한다. 미끄러지면 검은 로그 패널 등이 순식간에 지나가 깜빡이는 것처럼 보인다. */
   html{scroll-padding-top:120px;scroll-behavior:auto}
-  .side{position:sticky;top:0;z-index:6;height:auto;border-right:0;border-bottom:var(--b);padding:12px 16px;flex-direction:row;align-items:center;gap:12px;overflow-x:auto}
+  /* 아이폰 사파리는 '붙어 따라오는(sticky)' 머리를 메뉴로 바로 이동할 때 한 프레임 늦게 그려,
+     그 자리에 아래 내용(검은 패널 등)이 비쳐 깜빡여 보인다. 화면에 고정(fixed)하고 그만큼 본문을 내린다. */
+  .side{position:fixed;top:0;left:0;right:0;z-index:6;height:62px;border-right:0;border-bottom:var(--b);padding:0 16px;flex-direction:row;align-items:center;gap:12px;overflow-x:auto;transform:translateZ(0)}
+  .main{padding-top:62px}
   .me{padding:0;font-size:17px;white-space:nowrap}.me small,.role,.side-foot{display:none}
   #nav{flex-direction:row}
-  #nav a{padding:6px 10px;font-size:13px;white-space:nowrap}
+  #nav a{padding:6px 10px;font-size:13px;white-space:nowrap;transition:none}  /* 바뀔 때 두 칸이 동시에 회색으로 보이지 않게 */
   #nav em{display:none}
   .bar{position:static;padding:10px 16px}
   .content{padding:28px 16px 40px}

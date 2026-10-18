@@ -162,6 +162,12 @@ links.forEach(a => a.addEventListener('click', () => {
   jumpTo = target;
   mark(target);
   hold();
+  // 바로 이동하는 화면(휴대폰)에서는 도착한 영역이 빈 채로 보였다가 서서히 나타나지 않도록 미리 보여 준다.
+  if (getComputedStyle(document.documentElement).scrollBehavior !== 'smooth') {
+    const els = [...target.querySelectorAll('.rv:not(.in)')];
+    els.forEach(el => { el.style.transition = 'none'; el.classList.add('in'); });
+    requestAnimationFrame(() => requestAnimationFrame(() => els.forEach(el => { el.style.transition = ''; })));
+  }
 }));
 ['touchstart', 'wheel'].forEach(t => addEventListener(t, () => { if (jumpTo) release(); }, { passive: true }));
 function mark(cur) {
