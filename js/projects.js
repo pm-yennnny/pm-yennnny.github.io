@@ -221,7 +221,7 @@ window.PROJECTS = [
     ],
   },
   {
-    slug: 'recommend', no: '05', title: '개인화 추천 서비스', short: '개인화 추천', type: 'AI 추천', period: '2023.01 – 2023.08', status: '완료',
+    slug: 'recommend', no: '05', title: '개인화 추천 서비스', short: 'AI 상품 추천', type: 'AI 추천', period: '2023.01 – 2023.08', status: '완료',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '장바구니 분석으로 상품 간 연관 규칙을 찾아, 사람이 고르던 추천 상품을 추천 로직이 고르게 바꿨습니다.',
     role: 'PM · 기획 (본인 1명)', team: '디자인 1 · 프론트엔드 1 · 백엔드 1', contrib: 5,
