@@ -1,9 +1,10 @@
 // 프로젝트 내용은 이 파일에서만 고칩니다. 상세 페이지(work.html)가 이 내용을 읽어 화면을 그립니다.
 // 이미지에 blur: true 를 붙이면 '내부 자료 · 흐림 처리' 표시가 붙습니다. (이미지 파일 자체가 흐리게 저장되어 있습니다)
+// short: 메뉴·상단 경로·이전/다음에 쓰는 짧은 이름 (목록과 상세 제목은 title)
 // blocks 종류: list(목록) · steps(번호 단계) · chips(꼬리표) · flow(흐름 3단) · compare(전후 비교) · figures(이미지) · table(표) · code(코드 예시) · results(성과) · todo(준비 중 안내)
 window.PROJECTS = [
   {
-    slug: 'geo', no: '01', title: 'GEO 기반 검색 최적화 체계 구축', type: '검색 · GEO', period: '2026.03 – 2026.12 (예정)', status: '진행 중',
+    slug: 'geo', no: '01', title: 'GEO 기반 검색 최적화 체계 구축', short: 'GEO 검색 최적화', type: '검색 · GEO', period: '2026.03 – 2026.12 (예정)', status: '진행 중',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '생성형 검색(GEO) 환경에서 AI가 서비스 정보를 정확히 읽을 수 있도록 구조화 데이터를 설계하고, 그 효과를 지표로 확인하는 체계를 만들고 있습니다.',
     role: '구조화 데이터(JSON-LD) 설계 · 운영 정책 수립', team: '개발 · 마케팅 등 유관 부서와 협업', contrib: 0,
@@ -46,7 +47,7 @@ window.PROJECTS = [
     ],
   },
   {
-    slug: 'cms', no: '02', title: '상품 상세 에디터 구축과 GEO 대응 V2 리뉴얼', type: '백오피스', period: '2024.08 – 12 · 2026.07 – 09', status: '완료',
+    slug: 'cms', no: '02', title: '상품 상세 에디터 구축과 GEO 대응 V2 리뉴얼', short: '상품 상세 에디터 (GEO)', type: '백오피스', period: '2024.08 – 12 · 2026.07 – 09', status: '완료',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '2024년에는 사람이 손으로 만들던 상품 상세 페이지를 코딩 없이 조립하는 에디터로 바꿨습니다. 2026년에는 이 에디터를 V2로 다시 설계해, 한 번 만든 상세 콘텐츠가 AI에게 읽히고 자사몰과 외부몰에 함께 쓰이게 했습니다.',
     role: 'PM · 기획 (본인 1명)', team: '기획 1 · 프론트엔드 1 · 백엔드 1 (V1 · V2 동일)', contrib: 5,
@@ -126,7 +127,7 @@ window.PROJECTS = [
     ],
   },
   {
-    slug: 'crm', no: '03', title: 'CRM 연동과 데이터 기반 타겟팅 자동화', type: 'CRM · 자동화', period: '2025.07 – 2025.12', status: '완료',
+    slug: 'crm', no: '03', title: 'CRM 연동과 데이터 기반 타겟팅 자동화', short: 'CRM 타겟팅 자동화', type: 'CRM · 자동화', period: '2025.07 – 2025.12', status: '완료',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '내부 고객 데이터를 외부 CRM 솔루션과 연동하고, 고객 여정에 맞춰 메시지가 자동으로 나가도록 타겟팅 로직을 설계했습니다.',
     role: '연동 로직 설계 · CRM 자동화 기획', team: '', contrib: 0,
@@ -169,7 +170,7 @@ window.PROJECTS = [
     ],
   },
   {
-    slug: 'renewal', no: '04', title: '자사몰 리뉴얼 (PC · Mobile)', type: 'PM', period: '2023.12 – 2024.07', status: '완료',
+    slug: 'renewal', no: '04', title: '자사몰 리뉴얼 (PC · Mobile)', short: '자사몰 리뉴얼', type: 'PM', period: '2023.12 – 2024.07', status: '완료',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '사용자 행동 데이터에서 이탈 구간을 찾아 정보 구조와 정책을 다시 설계하고, 30~40명 규모의 리뉴얼을 오픈까지 이끌었습니다.',
     role: 'PM · 플랫폼 UX/UI 고도화와 백오피스 운영 정책 총괄', team: '기획 2 (본인 포함) · 디자인 1 · 프론트엔드 2 · 백엔드 5', contrib: 4,
@@ -220,7 +221,7 @@ window.PROJECTS = [
     ],
   },
   {
-    slug: 'recommend', no: '05', title: '개인화 추천 서비스', type: 'AI 추천', period: '2023.01 – 2023.08', status: '완료',
+    slug: 'recommend', no: '05', title: '개인화 추천 서비스', short: '개인화 추천', type: 'AI 추천', period: '2023.01 – 2023.08', status: '완료',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '장바구니 분석으로 상품 간 연관 규칙을 찾아, 사람이 고르던 추천 상품을 추천 로직이 고르게 바꿨습니다.',
     role: 'PM · 기획 (본인 1명)', team: '디자인 1 · 프론트엔드 1 · 백엔드 1', contrib: 5,
@@ -270,7 +271,7 @@ window.PROJECTS = [
     ],
   },
   {
-    slug: 'global', no: '06', title: '글로벌 서비스 런칭과 국내 서비스 리뉴얼', type: '0→1 · 글로벌', period: '2021.01 – 2022.08', status: '완료',
+    slug: 'global', no: '06', title: '글로벌 서비스 런칭과 국내 서비스 리뉴얼', short: '글로벌 서비스 런칭', type: '0→1 · 글로벌', period: '2021.01 – 2022.08', status: '완료',
     company: '키다리스튜디오 · 디지털 콘텐츠 플랫폼',
     summary: '태국·대만 글로벌 서비스를 런칭부터 운영 이관까지 이끌었고, 이듬해에는 국내 서비스의 이용 구조와 정책 체계를 다시 세우는 리뉴얼을 수행했습니다.',
     role: '글로벌 런칭 리드 · 국내 리뉴얼 기획', team: 'PM 1 · 기획 3 · 번역 2 · 디자인 1 · 프론트엔드 2 · 백엔드 4 (글로벌 런칭 기준)', contrib: 4,
@@ -327,7 +328,7 @@ window.PROJECTS = [
     ],
   },
   {
-    slug: 'search', no: '07', title: 'AI 하이브리드 검색 엔진 고도화', type: 'AI 검색', period: '2026.01 – 2026.09', status: '완료',
+    slug: 'search', no: '07', title: 'AI 하이브리드 검색 엔진 고도화', short: 'AI 하이브리드 검색', type: 'AI 검색', period: '2026.01 – 2026.09', status: '완료',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '키워드 검색에 의미 검색을 결합한 하이브리드 검색을 설계하고, 검색 품질을 판단하고 검증하는 기준을 만들었습니다.',
     role: 'AI 하이브리드 검색 엔진 설계 · 품질 검증 체계 수립', team: '협업 부서 · 외부 업체와 협업', contrib: 0,
@@ -415,7 +416,7 @@ window.PROJECTS = [
     ],
   },
   {
-    slug: 'agent', no: '08', title: 'AI 에이전트 기반 운영 자동화와 협업 언어 표준화', type: 'AI 에이전트', period: '2026.07 –', status: '진행 중',
+    slug: 'agent', no: '08', title: 'AI 에이전트 기반 운영 자동화와 협업 언어 표준화', short: 'AI 에이전트 운영 자동화', type: 'AI 에이전트', period: '2026.07 –', status: '진행 중',
     company: '풀무원 · 식품 D2C 자사몰',
     summary: '사람이 반복하던 운영 업무를 AI 에이전트가 처리하도록 실행 흐름을 설계하고, 기획·디자인·개발이 같은 말을 쓰도록 공통 언어 체계를 만들고 있습니다.',
     role: 'AI 에이전트 기획 · 유비쿼터스 언어 체계 설계', team: '', contrib: 0,

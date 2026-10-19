@@ -142,7 +142,7 @@ function setSub(open) {
 }
 if (navWork && subBox && window.PROJECTS) {
   subBox.innerHTML = window.PROJECTS.map(p =>
-    `<a href="work.html?p=${p.slug}"><span class="mono">${p.no}</span>${p.title}</a>`).join('');
+    `<a href="work.html?p=${p.slug}"><span class="mono">${p.no}</span>${p.short || p.title}</a>`).join('');
   navWork.addEventListener('click', () => setSub(!subOpen));  // 영역으로 이동하는 기본 동작은 그대로 둔다
 }
 
