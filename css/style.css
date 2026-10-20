@@ -212,6 +212,8 @@ h1{white-space:pre-line;font-size:clamp(34px,4.6vw,62px);font-weight:900;letter-
 a.kpi{display:block;color:inherit}
 .kpi .go{margin-left:6px;font-weight:900;display:inline-block;transition:transform .2s}
 a.kpi:hover .go,a.kpi.lit .go{transform:translateX(4px)}
+.kpi .d .yr::before{content:" · "}
+@media(max-width:820px){.kpi .d .nm{display:block}.kpi .d .yr::before{content:none}}  /* 휴대폰: 이름 한 줄, 연도 한 줄 */
 
 /* "동작 줄이기"를 켠 경우: 위치가 움직이는 효과만 뺀다.
    숫자 올라가기, 로그 쌓이기, 색·그림자 변화, 서서히 나타나기는 그대로 둔다. */

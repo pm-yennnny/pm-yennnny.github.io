@@ -7,7 +7,7 @@ const LAB = labs.find(l => l.slug === slug);
 const idx = Math.max(0, list.findIndex(p => p.slug === slug));
 const P = LAB || list[idx];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const nm = p => esc(p.short || p.title);   // 메뉴·경로·이전/다음에 쓰는 짧은 이름
+const nm = p => esc(p.title);
 const li = items => items.map(t => `<li>${esc(t)}</li>`).join('');
 // 흐림 처리한 이미지(blur)는 확대해도 보이는 것이 없으므로 누를 수 없게 그린다.
 const fig = f => `<figure>${[].concat(f.src).map(src => f.blur ? `<div class="zoom still"><img src="${src}" alt="${esc(f.cap)}" loading="lazy"></div>` : `<button class="zoom" data-src="${src}" aria-label="${esc(f.cap)} 크게 보기"><img src="${src}" alt="${esc(f.cap)}" loading="lazy"></button>`).join('')}<figcaption>${esc(f.cap)}${f.blur ? '<span class="bl">내부 자료 · 흐림 처리</span>' : ''}</figcaption>${f.notes ? `<ul class="dash">${f.notes.map(n => typeof n === 'string' ? `<li>${esc(n)}</li>` : `<li><b>${esc(n.h)}</b>${esc(n.p)}</li>`).join('')}</ul>` : ''}</figure>`;
@@ -46,7 +46,7 @@ function labChrome() {
 
 function render() {
   document.title = `${P.title} — 지예은`;
-  document.getElementById('crumb').textContent = LAB ? P.title : `${P.no} ${P.short || P.title}`;
+  document.getElementById('crumb').textContent = LAB ? P.title : `${P.no} ${P.title}`;
   const dots = P.contrib ? '●'.repeat(P.contrib) + '○'.repeat(5 - P.contrib) : '';
   const prev = list[(idx - 1 + list.length) % list.length], next = list[(idx + 1) % list.length];
 
