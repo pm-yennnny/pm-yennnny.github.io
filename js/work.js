@@ -23,7 +23,7 @@ const BLOCK = {
   table: b => `<div class="tbl" style="--grid:${b.grid || `repeat(${b.head.length},1fr)`}"><div class="tbl-h mono">${b.head.map(h => `<span>${esc(h)}</span>`).join('')}</div>${b.rows.map(r => `<div class="tbl-r">${r.map((c, i) => `<span data-h="${esc(b.head[i])}">${esc(c)}</span>`).join('')}</div>`).join('')}</div>${b.note ? `<p class="code-note">${esc(b.note)}</p>` : ''}`,
   code: b => `<pre class="code mono"><code>${esc(b.code)}</code></pre>${b.note ? `<p class="code-note">${esc(b.note)}</p>` : ''}`,
   todo: b => `<p class="todo mono">${esc(b.text)}</p>`,
-  link: b => `<p class="pad"><a class="btn-line" href="${b.href}" target="_blank" rel="noopener">${esc(b.text)} ↗</a></p>`,
+  link: b => `<p class="pad link"><a class="btn-line" href="${b.href}" target="_blank" rel="noopener">${esc(b.text)} ↗</a>${b.note ? `<small>${esc(b.note)}</small>` : ''}</p>`,
 };
 
 // Lab 사례 하단: 다른 일하는 방식 사례와, 이 방식을 실제로 쓴 프로젝트로 연결한다.
@@ -64,7 +64,7 @@ function render() {
         ${P.company ? `<div><dt class="mono">회사</dt><dd>${esc(P.company)}</dd></div>` : ''}
         <div><dt class="mono">기간</dt><dd>${esc(P.period)}</dd></div>
         <div><dt class="mono">역할</dt><dd>${esc(P.role)}</dd></div>
-        ${P.site ? `<div><dt class="mono">결과물</dt><dd class="d-site"><a class="btn-line" href="${P.site.href}" target="_blank" rel="noopener">${esc(P.site.text)} ↗</a>${P.site.note ? `<small>${esc(P.site.note)}</small>` : ''}</dd></div>` : ''}
+        ${P.tools ? `<div><dt class="mono">만든 도구</dt><dd>${esc(P.tools)}</dd></div>` : ''}
         ${P.team ? `<div><dt class="mono">함께한 사람</dt><dd>${esc(P.team)}</dd></div>` : ''}
         ${dots ? `<div><dt class="mono">기여도</dt><dd class="dots">${dots}</dd></div>` : ''}
       </dl>

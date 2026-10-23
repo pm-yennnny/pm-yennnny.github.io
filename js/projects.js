@@ -465,7 +465,7 @@ window.LABS = [
     summary: '통계청(KOSIS) 통계와 NVIDIA 합성 인구 데이터로 가상 고객 3명을 만들고, 화면이나 질문을 보여 주며 그 고객들과 인터뷰해 보는 도구를 직접 만들었습니다.',
     role: '기획 · 설계 · 제작 (1인)',
     kpis: [{ v: '1인', l: '기획 → 디자인 → 개발 → 배포' }, { v: '2주', l: '아이디어부터 배포까지' }, { v: '2종', l: '데이터 · 통계청 KOSIS + NVIDIA 합성 인구' }],
-    site: { href: 'https://virtual-interview-xi.vercel.app', text: 'Persona Lab 직접 써 보기', note: 'AI 응답이라 몇 초 걸리고, 사용량이 많으면 잠시 멈출 수 있습니다.' },
+    tools: 'Claude · Next.js · Vercel · Gemini',
     blocks: [
       { type: 'list', title: '왜 만들었나', items: [
         '고객 인터뷰는 모집, 일정 조율, 테스트룸 때문에 기획 초기에 자주 하기 어렵습니다.',
@@ -486,6 +486,7 @@ window.LABS = [
           '인터뷰가 끝나면 STEP 4에서 리포트로 정리합니다.',
         ] },
       ] },
+      { type: 'link', title: '직접 써 보기', href: 'https://virtual-interview-xi.vercel.app', text: 'Persona Lab 열기', note: 'AI 응답이라 몇 초 걸리고, 사용량이 많으면 잠시 멈출 수 있습니다.' },
       { type: 'chips', title: '가상 고객을 이루는 항목', items: ['가구 구성', '장보기 방식', '디지털 익숙도', '식생활', '목표', '익숙한 서비스', '판단 기준', '불안 요소', '이탈 조건', '말투'] },
       { type: 'steps', title: '판단과 과정', items: [
         { h: '근거 있는 가상 고객', p: '가상 고객은 KOSIS 통계(연령대별 가구 구성, 모바일 쇼핑 비중)와 NVIDIA Nemotron-Personas-Korea 합성 인구 데이터에서 출발합니다. 선택지마다 근거가 된 수치를 보여 줘, 왜 이런 고객이 나왔는지 따라갈 수 있게 했습니다.' },
@@ -494,7 +495,6 @@ window.LABS = [
         { h: '입력 자료 보호', p: 'AI 분석에 무료 버전을 쓰기 때문에 입력 내용이 서비스 개선에 쓰일 수 있습니다. 출시 전 화면이나 사내 자료는 올리지 말라는 안내를 입력창 바로 아래에 두었습니다.' },
       ] },
       { type: 'chips', title: '사용한 것', items: ['Claude (제작)', 'Next.js', 'Vercel', 'Google Gemini', '통계청 KOSIS', 'NVIDIA Nemotron-Personas-Korea (CC BY 4.0)'] },
-      { type: 'link', title: '직접 써 보기', href: 'https://virtual-interview-xi.vercel.app', text: 'Persona Lab 열기' },
     ],
   },
 ];
