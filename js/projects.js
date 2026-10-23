@@ -456,3 +456,44 @@ window.PROJECTS = [
     ],
   },
 ];
+
+// 일하는 방식(Lab) 사례. 형식은 위 프로젝트와 같고, no 대신 related(이 방식을 쓴 프로젝트의 slug)를 둔다.
+window.LABS = [
+  {
+    slug: 'persona', title: '페르소나 시스템', type: '토이 프로젝트 · AI', period: '2026', status: '운영 중',
+    related: '',
+    summary: '통계청(KOSIS) 통계와 NVIDIA 합성 인구 데이터로 가상 고객 3명을 만들고, 화면이나 질문을 보여 주며 그 고객들과 인터뷰해 보는 도구를 직접 만들었습니다.',
+    role: '기획 · 설계 · 제작 (1인)',
+    site: { href: 'https://virtual-interview-xi.vercel.app', text: 'Persona Lab 직접 써 보기', note: 'AI 응답이라 몇 초 걸리고, 사용량이 많으면 잠시 멈출 수 있습니다.' },
+    blocks: [
+      { type: 'list', title: '왜 만들었나', items: [
+        '고객 인터뷰는 모집, 일정 조율, 테스트룸 때문에 기획 초기에 자주 하기 어렵습니다.',
+        '그래서 가설을 세운 그 자리에서 "이 고객이라면 어떻게 반응할까"를 빠르게 점검해 볼 도구가 필요했습니다.',
+        '단, 상상으로 만든 인물이 아니라 실제 통계에 근거한 고객이어야 의미가 있다고 봤습니다.',
+      ] },
+      { type: 'figures', title: '쓰는 흐름', layout: 'wide', items: [
+        { src: 'assets/img/persona-pc-target.jpg', cap: 'STEP 1 — 누구를 인터뷰할까요?', notes: [
+          '연령대, 가구원 수, 관심 식품 분야, 성별로 타깃을 고릅니다.',
+          '선택지마다 근거가 된 통계 수치를 함께 보여 줍니다. 예: 20대 1인 가구 80.4%, 음·식료품 모바일 구매 비중 81.8%.',
+        ] },
+        { src: 'assets/img/persona-pc-persona.jpg', cap: 'STEP 2 — 인터뷰할 고객 3명', notes: [
+          '같은 타깃 안에서도 성향이 다른 3명을 만듭니다. 예: 시간 효율형, 가성비 추구형, 성분·신뢰 중시.',
+          '장보기 방식, 판단 기준, 불안 요소, 이탈 조건, 말투까지 갖춘 인물로 설계합니다.',
+        ] },
+        { src: 'assets/img/persona-pc-interview.jpg', cap: 'STEP 3 — 그룹 인터뷰', notes: [
+          '화면 캡처나 서비스 URL을 올리면 3명이 각자 반응합니다. 자유 질문도 할 수 있습니다.',
+          '인터뷰가 끝나면 STEP 4에서 리포트로 정리합니다.',
+        ] },
+      ] },
+      { type: 'chips', title: '가상 고객을 이루는 항목', items: ['가구 구성', '장보기 방식', '디지털 익숙도', '식생활', '목표', '익숙한 서비스', '판단 기준', '불안 요소', '이탈 조건', '말투'] },
+      { type: 'steps', title: '판단과 과정', items: [
+        { h: '근거 있는 가상 고객', p: '가상 고객은 KOSIS 통계(연령대별 가구 구성, 모바일 쇼핑 비중)와 NVIDIA Nemotron-Personas-Korea 합성 인구 데이터에서 출발합니다. 선택지마다 근거가 된 수치를 보여 줘, 왜 이런 고객이 나왔는지 따라갈 수 있게 했습니다.' },
+        { h: '한 명이 아니라 세 명', p: '한 명의 답은 그 사람의 의견일 뿐입니다. 같은 타깃 안에서 성향이 다른 3명을 함께 인터뷰해, 반응이 갈리는 지점을 볼 수 있게 했습니다.' },
+        { h: '한계를 먼저 밝힌다', p: '"AI 추론 기반 참고 의견이며 실제 사용성 테스트를 대체하지 않습니다"라는 안내와 데이터 출처를 화면에 늘 보이게 두었습니다. 실제 고객 조사를 대신하는 도구가 아니라, 그 전에 가설을 다듬는 도구로 자리를 정했습니다.' },
+        { h: '입력 자료 보호', p: 'AI 분석에 무료 버전을 쓰기 때문에 입력 내용이 서비스 개선에 쓰일 수 있습니다. 출시 전 화면이나 사내 자료는 올리지 말라는 안내를 입력창 바로 아래에 두었습니다.' },
+      ] },
+      { type: 'chips', title: '사용한 것', items: ['Next.js', 'Vercel', 'Google Gemini', '통계청 KOSIS', 'NVIDIA Nemotron-Personas-Korea (CC BY 4.0)'] },
+      { type: 'link', title: '직접 써 보기', href: 'https://virtual-interview-xi.vercel.app', text: 'Persona Lab 열기' },
+    ],
+  },
+];

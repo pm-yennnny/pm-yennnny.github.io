@@ -23,12 +23,15 @@ const BLOCK = {
   table: b => `<div class="tbl" style="--grid:${b.grid || `repeat(${b.head.length},1fr)`}"><div class="tbl-h mono">${b.head.map(h => `<span>${esc(h)}</span>`).join('')}</div>${b.rows.map(r => `<div class="tbl-r">${r.map((c, i) => `<span data-h="${esc(b.head[i])}">${esc(c)}</span>`).join('')}</div>`).join('')}</div>${b.note ? `<p class="code-note">${esc(b.note)}</p>` : ''}`,
   code: b => `<pre class="code mono"><code>${esc(b.code)}</code></pre>${b.note ? `<p class="code-note">${esc(b.note)}</p>` : ''}`,
   todo: b => `<p class="todo mono">${esc(b.text)}</p>`,
+  link: b => `<p class="pad"><a class="btn-line" href="${b.href}" target="_blank" rel="noopener">${esc(b.text)} ↗</a></p>`,
 };
 
 // Lab 사례 하단: 다른 일하는 방식 사례와, 이 방식을 실제로 쓴 프로젝트로 연결한다.
 function labNav() {
   const other = labs[(labs.indexOf(P) + 1) % labs.length];
   const R = list.find(p => p.slug === P.related);
+  if ((!other || other === P) && !R) return `
+      <a class="panel" href="index.html#lab"><small class="mono">← 돌아가기</small><b>일하는 방식</b></a>`;
   return `
       ${other && other !== P ? `<a class="panel" href="work.html?p=${other.slug}"><small class="mono">← 다른 일하는 방식</small><b>${esc(other.title)}</b></a>` : '<span></span>'}
       ${R ? `<a class="panel" href="work.html?p=${R.slug}"><small class="mono">이 방식을 쓴 프로젝트 · ${R.no} →</small><b>${nm(R)}</b></a>` : ''}`;
@@ -55,12 +58,14 @@ function render() {
       <p class="mono">${LAB ? 'Lab' : `#${P.no}`} · ${esc(P.type)} · ${esc(P.period)} <em class="st ${P.status === '완료' ? '' : 'run'}">${esc(P.status)}</em></p>
       <h1>${esc(P.title)}</h1>
       <p class="lead">${esc(P.summary)}</p>
+      ${P.site ? `<p class="d-site"><a class="btn-line" href="${P.site.href}" target="_blank" rel="noopener">${esc(P.site.text)} ↗</a>${P.site.note ? `<small>${esc(P.site.note)}</small>` : ''}</p>` : ''}
     </header>
     <div class="d-top">
       <dl class="panel spec">
         ${P.company ? `<div><dt class="mono">회사</dt><dd>${esc(P.company)}</dd></div>` : ''}
         <div><dt class="mono">기간</dt><dd>${esc(P.period)}</dd></div>
         <div><dt class="mono">역할</dt><dd>${esc(P.role)}</dd></div>
+        ${P.site ? `<div><dt class="mono">주소</dt><dd><a class="u" href="${P.site.href}" target="_blank" rel="noopener">${esc(P.site.href.replace(/^https?:\/\//, ''))} ↗</a></dd></div>` : ''}
         ${P.team ? `<div><dt class="mono">함께한 사람</dt><dd>${esc(P.team)}</dd></div>` : ''}
         ${dots ? `<div><dt class="mono">기여도</dt><dd class="dots">${dots}</dd></div>` : ''}
       </dl>

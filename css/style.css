@@ -258,6 +258,11 @@ a.kpi:hover .go,a.kpi.lit .go{transform:translateX(4px)}
 .steps h3{font-size:17px;font-weight:800;letter-spacing:-.02em}
 .steps p{font-size:15px;color:var(--sub);margin-top:4px;max-width:46em}
 .chips.pad{padding:20px 22px}
+p.pad{padding:20px 22px}
+/* 직접 써 볼 수 있는 결과물: 소개 문단 아래 바로가기 */
+.d-site{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-top:18px}
+.d-site small{font-size:12px;color:var(--sub)}
+.spec dd a.u{text-decoration:underline;text-underline-offset:3px;word-break:break-all}
 .flow3{display:grid;grid-template-columns:repeat(3,1fr)}
 .flow3.c4{grid-template-columns:repeat(4,1fr)}
 /* 한 프로젝트 안에서 단계(예: 2024 V1, 2026 V2)를 나누는 구분선 */
