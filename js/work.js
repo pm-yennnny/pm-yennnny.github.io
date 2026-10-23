@@ -64,7 +64,7 @@ function render() {
         ${P.company ? `<div><dt class="mono">회사</dt><dd>${esc(P.company)}</dd></div>` : ''}
         <div><dt class="mono">기간</dt><dd>${esc(P.period)}</dd></div>
         <div><dt class="mono">역할</dt><dd>${esc(P.role)}</dd></div>
-        ${P.tools ? `<div><dt class="mono">만든 도구</dt><dd>${esc(P.tools)}</dd></div>` : ''}
+        ${P.tools ? `<div><dt class="mono">${esc(P.toolsLabel || '만든 도구')}</dt><dd>${esc(P.tools)}</dd></div>` : ''}
         ${P.team ? `<div><dt class="mono">함께한 사람</dt><dd>${esc(P.team)}</dd></div>` : ''}
         ${dots ? `<div><dt class="mono">기여도</dt><dd class="dots">${dots}</dd></div>` : ''}
       </dl>
