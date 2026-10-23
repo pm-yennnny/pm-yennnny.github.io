@@ -58,14 +58,13 @@ function render() {
       <p class="mono">${LAB ? 'Lab' : `#${P.no}`} · ${esc(P.type)} · ${esc(P.period)} <em class="st ${P.status === '완료' ? '' : 'run'}">${esc(P.status)}</em></p>
       <h1>${esc(P.title)}</h1>
       <p class="lead">${esc(P.summary)}</p>
-      ${P.site ? `<p class="d-site"><a class="btn-line" href="${P.site.href}" target="_blank" rel="noopener">${esc(P.site.text)} ↗</a>${P.site.note ? `<small>${esc(P.site.note)}</small>` : ''}</p>` : ''}
     </header>
     <div class="d-top">
       <dl class="panel spec">
         ${P.company ? `<div><dt class="mono">회사</dt><dd>${esc(P.company)}</dd></div>` : ''}
         <div><dt class="mono">기간</dt><dd>${esc(P.period)}</dd></div>
         <div><dt class="mono">역할</dt><dd>${esc(P.role)}</dd></div>
-        ${P.site ? `<div><dt class="mono">주소</dt><dd><a class="u" href="${P.site.href}" target="_blank" rel="noopener">${esc(P.site.href.replace(/^https?:\/\//, ''))} ↗</a></dd></div>` : ''}
+        ${P.site ? `<div><dt class="mono">결과물</dt><dd class="d-site"><a class="btn-line" href="${P.site.href}" target="_blank" rel="noopener">${esc(P.site.text)} ↗</a>${P.site.note ? `<small>${esc(P.site.note)}</small>` : ''}</dd></div>` : ''}
         ${P.team ? `<div><dt class="mono">함께한 사람</dt><dd>${esc(P.team)}</dd></div>` : ''}
         ${dots ? `<div><dt class="mono">기여도</dt><dd class="dots">${dots}</dd></div>` : ''}
       </dl>
