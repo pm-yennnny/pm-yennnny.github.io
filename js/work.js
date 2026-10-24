@@ -23,6 +23,8 @@ const BLOCK = {
   table: b => `<div class="tbl" style="--grid:${b.grid || `repeat(${b.head.length},1fr)`}"><div class="tbl-h mono">${b.head.map(h => `<span>${esc(h)}</span>`).join('')}</div>${b.rows.map(r => `<div class="tbl-r">${r.map((c, i) => `<span data-h="${esc(b.head[i])}">${esc(c)}</span>`).join('')}</div>`).join('')}</div>${b.note ? `<p class="code-note">${esc(b.note)}</p>` : ''}`,
   code: b => `<pre class="code mono"><code>${esc(b.code)}</code></pre>${b.note ? `<p class="code-note">${esc(b.note)}</p>` : ''}`,
   todo: b => `<p class="todo mono">${esc(b.text)}</p>`,
+  // 화면 녹화: 소리 없이 반복 재생. '동작 줄이기'를 켠 사람에게는 자동 재생하지 않는다
+  video: b => `<figure class="vid"><video src="${b.src}" poster="${b.poster || ''}" muted loop playsinline controls preload="metadata"${matchMedia('(prefers-reduced-motion: reduce)').matches ? '' : ' autoplay'}></video><figcaption>${esc(b.cap)}</figcaption></figure>`,
   link: b => `<p class="pad link"><a class="btn-line" href="${b.href}" target="_blank" rel="noopener">${esc(b.text)} ↗</a>${b.note ? `<small>${esc(b.note)}</small>` : ''}</p>`,
 };
 

@@ -260,6 +260,10 @@ a.kpi:hover .go,a.kpi.lit .go{transform:translateX(4px)}
 .steps p{font-size:15px;color:var(--sub);margin-top:4px;max-width:46em}
 .chips.pad{padding:20px 22px}
 p.pad{padding:20px 22px}
+/* 화면 녹화 영상: 세로로 긴 편집 화면을 가운데에 */
+.vid{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 22px;background:var(--bg)}
+.vid video{width:100%;max-width:340px;border:var(--b);border-radius:12px;background:#fff;display:block}
+.vid figcaption{font-size:13px;font-weight:700;text-align:center}
 /* 직접 써 볼 수 있는 결과물 링크와 안내 */
 .pad.link{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
 .pad.link small{font-size:12px;color:var(--sub)}
