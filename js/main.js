@@ -36,7 +36,7 @@ const LAYERS = [
 ];
 // [연도, 프로젝트, 역할, { 층: 그 층에서 한 일 }] — 최신순
 const LOG = [
-  ['2026', 'AI 에이전트 운영 자동화', '에이전트 기획 (개인 과제)', { l: '에이전트 실행 흐름', d: '입력 데이터 정의' }],
+  ['2026', 'QA 자동화 에이전트', '개인 과제 · 기획', { l: '자동 검증 흐름', d: '기획서 분석, 테스트 케이스 생성', p: '결함 등록 표준' }],
   ['2026', '유비쿼터스 언어 시스템', '용어 체계 · 검색 설계', { s: '용어 사전, 조직도·역할·권한 이력 화면', l: 'MCP 검색, OAuth 인증과 권한', d: '기능·화면·데이터·상태 관계 정의', p: '용어 기준' }],
   ['2026', 'AI 하이브리드 검색', '검색 설계 · 품질 검증', { s: '검색 화면, AI 추천순 정렬', l: '키워드 + 의미 검색 결합 기준', d: '검색 로그 설계', p: '검색 정책 가이드, 테스트 케이스' }],
   ['2026', 'GEO 검색 최적화', '데이터 설계 · 정책', { d: '구조화 데이터 설계와 매핑', p: '구조화 데이터 운영 정책' }],
@@ -51,6 +51,7 @@ const LOG = [
   ['2019', '쿠폰 서비스', '프로젝트 리드', { s: '쿠폰 화면, 결제 경로', l: '세그먼트별 자동 발송', d: '쿠폰 지표 대시보드', b: '쿠폰 생성 · 발행 · 정산', p: '쿠폰 정책 표준화' }],
   ['2017', '신규 카테고리 서비스', '수익 모델 · 정책 수립', { s: 'PC · Mobile · Tablet 화면', d: '고객 성향 · 판매량 데이터 분석', b: '매출 통계 · 정산', p: '수익 모델과 이용 정책' }],
   ['2016', '전용 플레이어 앱', 'PM · 스토어 출시', { s: '앱 화면과 사용 경험', d: '행동 데이터 수집, 웹 연동', p: '운영 정책, 스토어 배포' }],
+  ['2012', 'LG전자 모바일 SW 테스트', 'QA · 테스트 설계', { l: 'SW 테스트 케이스 분석·설계', p: '산출물 검수, QA 리포트' }],
 ];
 const layersBox = document.getElementById('layers');
 const logBox = document.getElementById('log');
@@ -107,6 +108,26 @@ onceVisible(logBox, () => {
     else typing = false;
   })();
 });
+
+// ── 경력: 왼쪽 회사를 누르면 오른쪽에 그 회사의 맡은 일과 성과를 보여 준다 ──
+const crr = document.querySelector('.crr');
+if (crr) {
+  const head = document.getElementById('crr-head');
+  // 지금 회사의 재직 기간은 오늘 날짜로 계산한다 (입사 달 포함)
+  crr.querySelectorAll('[data-start]').forEach(el => {
+    const [y, m] = el.dataset.start.split('-').map(Number), now = new Date();
+    const months = (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - m) + 1;
+    const t = `${Math.floor(months / 12)}년${months % 12 ? ` ${months % 12}개월` : ''}`;
+    el.textContent = el.classList.contains('crr-t2') ? ` · ${t}` : t;
+  });
+  crr.addEventListener('click', e => {
+    const b = e.target.closest('.crr-co');
+    if (!b) return;
+    crr.querySelectorAll('.crr-co').forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
+    crr.querySelectorAll('.crr-d').forEach(d => { d.hidden = d.dataset.c !== b.dataset.c; });
+    head.textContent = b.dataset.h;
+  });
+}
 
 // ── Lab: 손글씨 숫자 그림 (7×7 점으로 그린 3) ──
 const DIGIT = ['0111110', '0000011', '0000011', '0011110', '0000011', '0000011', '0111110'];
@@ -215,4 +236,4 @@ function litOnScroll(selector) {
   }, { rootMargin: '-45% 0px -45% 0px' });   // 화면 세로 가운데 10% 띠
   document.querySelectorAll(selector).forEach(el => io.observe(el));
 }
-litOnScroll('.kpi, .wk, a.job, a.build');  // '다루는 것' 박스는 스크롤 효과 없음
+litOnScroll('.kpi, .wk, a.build');  // '다루는 것' 박스는 스크롤 효과 없음

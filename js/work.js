@@ -1,9 +1,9 @@
 // 프로젝트 상세 페이지: 주소의 ?p=이름 을 보고 projects.js의 내용을 화면에 그린다.
-// 일하는 방식(Lab) 사례는 window.LABS에 따로 두어, 대표 프로젝트의 번호·순서·목록에 섞이지 않게 한다.
+// "업무 효율을 높이는 AI"(Lab) 항목은 window.LABS에 따로 두어, 대표 프로젝트의 번호·순서·목록에 섞이지 않게 한다.
 const list = window.PROJECTS || [];
 const labs = window.LABS || [];
 const slug = new URLSearchParams(location.search).get('p');
-const LAB = labs.find(l => l.slug === slug);
+const LAB = labs.find(l => l.slug === slug || (l.alias || []).includes(slug));   // 예전 주소(alias)로 들어와도 같은 페이지
 const idx = Math.max(0, list.findIndex(p => p.slug === slug));
 const P = LAB || list[idx];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -26,15 +26,15 @@ const BLOCK = {
   link: b => `<p class="pad link"><a class="btn-line" href="${b.href}" target="_blank" rel="noopener">${esc(b.text)} ↗</a>${b.note ? `<small>${esc(b.note)}</small>` : ''}</p>`,
 };
 
-// Lab 사례 하단: 다른 일하는 방식 사례와, 이 방식을 실제로 쓴 프로젝트로 연결한다.
+// Lab 항목 하단: 같은 영역의 다른 항목과, 관련 프로젝트로 연결한다.
 function labNav() {
   const other = labs[(labs.indexOf(P) + 1) % labs.length];
   const R = list.find(p => p.slug === P.related);
   if ((!other || other === P) && !R) return `
-      <a class="panel" href="index.html#lab"><small class="mono">← 돌아가기</small><b>일하는 방식</b></a>`;
+      <a class="panel" href="index.html#lab"><small class="mono">← 돌아가기</small><b>업무 효율을 높이는 AI</b></a>`;
   return `
-      ${other && other !== P ? `<a class="panel" href="work.html?p=${other.slug}"><small class="mono">← 다른 일하는 방식</small><b>${esc(other.title)}</b></a>` : '<span></span>'}
-      ${R ? `<a class="panel" href="work.html?p=${R.slug}"><small class="mono">이 방식을 쓴 프로젝트 · ${R.no} →</small><b>${nm(R)}</b></a>` : ''}`;
+      ${other && other !== P ? `<a class="panel" href="work.html?p=${other.slug}"><small class="mono">← 업무 효율을 높이는 AI</small><b>${esc(other.title)}</b></a>` : '<span></span>'}
+      ${R ? `<a class="panel" href="work.html?p=${R.slug}"><small class="mono">관련 프로젝트 · ${R.no} →</small><b>${nm(R)}</b></a>` : ''}`;
 }
 
 // Lab 사례에서는 왼쪽 메뉴에서 Work 대신 Lab을 켜고, 상단 경로도 Lab으로 바꾼다.
