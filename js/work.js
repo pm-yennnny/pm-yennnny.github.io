@@ -50,7 +50,9 @@ function labChrome() {
 function render() {
   document.title = `${P.title} — 지예은`;
   document.getElementById('crumb').textContent = LAB ? P.title : `${P.no} ${P.title}`;
-  const dots = P.contrib ? '●'.repeat(P.contrib) + '○'.repeat(5 - P.contrib) : '';
+  // 기여도는 5칸. 4.5처럼 반 칸도 표시한다 (◐)
+  const full = Math.floor(P.contrib || 0), half = (P.contrib || 0) % 1 >= 0.5 ? 1 : 0;
+  const dots = P.contrib ? '●'.repeat(full) + '◐'.repeat(half) + '○'.repeat(5 - full - half) : '';
   const prev = list[(idx - 1 + list.length) % list.length], next = list[(idx + 1) % list.length];
 
   document.getElementById('detail').innerHTML = `
@@ -64,7 +66,6 @@ function render() {
         ${P.company ? `<div><dt class="mono">회사</dt><dd>${esc(P.company)}</dd></div>` : ''}
         <div><dt class="mono">기간</dt><dd>${esc(P.period)}</dd></div>
         <div><dt class="mono">역할</dt><dd>${esc(P.role)}</dd></div>
-        ${P.tools ? `<div><dt class="mono">${esc(P.toolsLabel || '만든 도구')}</dt><dd>${esc(P.tools)}</dd></div>` : ''}
         ${P.team ? `<div><dt class="mono">함께한 사람</dt><dd>${esc(P.team)}</dd></div>` : ''}
         ${dots ? `<div><dt class="mono">기여도</dt><dd class="dots">${dots}</dd></div>` : ''}
       </dl>
