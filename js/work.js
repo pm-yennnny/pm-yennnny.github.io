@@ -43,8 +43,9 @@ function labNav() {
 function labChrome() {
   const nav = document.getElementById('nav');
   nav.querySelector('a[href="index.html#work"]').classList.remove('on', 'open');
-  nav.querySelector('a[href="index.html#lab"]').classList.add('on');
+  nav.querySelector('a[href="index.html#lab"]').classList.add('on', 'open');
   document.getElementById('sub').classList.add('fold');
+  document.getElementById('sub-lab').classList.remove('fold');   // Lab 목록을 펼치고 지금 항목을 표시
   const bar = document.querySelector('.bar a[href="index.html#work"]');
   bar.href = 'index.html#lab'; bar.textContent = 'Lab';
 }
@@ -81,37 +82,42 @@ function render() {
 
   // 왼쪽 메뉴의 프로젝트 목록
   document.getElementById('sub').innerHTML = list.map(p =>
-    `<a href="work.html?p=${p.slug}"${p === P ? ' class="on"' : ''}><span class="mono">${p.no}</span>${nm(p)}</a>`).join('');
+    `<a href="work.html?p=${p.slug}"${p === P ? ' class="on"' : ''}>${nm(p)}</a>`).join('');
+  document.getElementById('sub-lab').innerHTML = labs.map(l =>
+    `<a href="work.html?p=${l.slug}"${l === P ? ' class="on"' : ''}>${nm(l)}</a>`).join('');
 }
 if (P) { render(); if (LAB) labChrome(); }
 
-// ── 휴대폰: 상단 Work 탭을 누르면 바 아래로 프로젝트 목록이 펼쳐진다 ──
-// (PC는 왼쪽 메뉴에 목록이 늘 보이므로 이 동작은 화면이 좁을 때만 쓴다)
-const workTab = document.querySelector('#nav a[href="index.html#work"]');
+// ── 휴대폰: 상세 페이지 상단의 Work·Lab 탭을 누르면 바 아래로 목록이 펼쳐진다 ──
+// (PC는 왼쪽 메뉴에 목록이 보이므로 이 동작은 화면이 좁을 때만 쓴다)
 const mq = matchMedia('(max-width: 820px)');
-const drop = document.createElement('div');
-drop.id = 'msub';
-drop.className = 'msub';
-drop.hidden = true;
-drop.innerHTML = list.map(p =>
-  `<a href="work.html?p=${p.slug}"${p === P ? ' class="on" aria-current="page"' : ''}><span class="mono">${p.no}</span>${nm(p)}</a>`).join('') +
-  '<a class="all" href="index.html#work">전체 목록 보기 →</a>';
-document.body.appendChild(drop);
-function setDrop(open) {
-  drop.hidden = !open;
-  workTab.classList.toggle('mopen', open);
-  workTab.setAttribute('aria-expanded', open);
+const drops = [];
+function makeDrop(tabHref, items, allText) {
+  const tab = document.querySelector(`#nav a[href="${tabHref}"]`);
+  if (!tab || !items.length) return;
+  const drop = document.createElement('div');
+  drop.className = 'msub';
+  drop.hidden = true;
+  drop.innerHTML = items.map(p =>
+    `<a href="work.html?p=${p.slug}"${p === P ? ' class="on" aria-current="page"' : ''}>${nm(p)}</a>`).join('') +
+    `<a class="all" href="${tabHref}">${allText} →</a>`;
+  document.body.appendChild(drop);
+  const d = { tab, drop, set: open => { drop.hidden = !open; tab.classList.toggle('mopen', open); tab.setAttribute('aria-expanded', open); } };
+  tab.addEventListener('click', e => {
+    if (!mq.matches) return;   // PC는 원래대로 첫 화면 해당 영역으로 이동
+    e.preventDefault();
+    drops.forEach(x => { if (x !== d) x.set(false); });
+    d.set(drop.hidden);
+  });
+  drops.push(d);
 }
-workTab.addEventListener('click', e => {
-  if (!mq.matches) return;   // PC는 원래대로 첫 화면 Work 영역으로 이동
-  e.preventDefault();
-  setDrop(drop.hidden);
-});
+makeDrop('index.html#work', list, '전체 목록 보기');
+makeDrop('index.html#lab', labs, '업무 효율을 높이는 AI 보기');
 document.addEventListener('click', e => {
-  if (!drop.hidden && !drop.contains(e.target) && !workTab.contains(e.target)) setDrop(false);
+  drops.forEach(d => { if (!d.drop.hidden && !d.drop.contains(e.target) && !d.tab.contains(e.target)) d.set(false); });
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') setDrop(false); });
-mq.addEventListener('change', () => setDrop(false));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') drops.forEach(d => d.set(false)); });
+mq.addEventListener('change', () => drops.forEach(d => d.set(false)));
 
 // 이미지 크게 보기
 const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');

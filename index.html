@@ -18,7 +18,7 @@
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261025f">
+<link rel="stylesheet" href="css/style.css?v=20261026c">
 </head>
 <body>
 
@@ -29,8 +29,10 @@
     <a href="#overview" class="on">Overview</a>
     <a href="#work" id="nav-work" aria-expanded="false" aria-controls="sub">Work<span class="nav-r"><em class="mono">07</em><i class="chev" aria-hidden="true">›</i></span></a>
     <div id="sub" class="sub fold"></div>
-    <a href="#lab">Lab<em class="mono">03</em></a>
-    <a href="#career">Career<em class="mono">4사</em></a>
+    <a href="#lab" id="nav-lab" aria-expanded="false" aria-controls="sub-lab">Lab<span class="nav-r"><em class="mono">03</em><i class="chev" aria-hidden="true">›</i></span></a>
+    <div id="sub-lab" class="sub fold"></div>
+    <a href="#career">Career</a>
+    <a href="#voice">Voice</a>
     <a href="#toolbox">Toolbox</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -142,51 +144,43 @@
         <div class="panel">
           <div class="ph"><span>회사</span><span>4사 · 2012 → 현재</span></div>
           <div class="lyrs">
-          <button class="lyr crr-co on" data-c="pulmuone" data-h="풀무원 · 2022.08 – 현재" aria-pressed="true"><span class="crr-n"><b>풀무원 <em class="st run">현재</em></b><small>과장 · AX엔지니어링</small><span class="crr-k">AI 상품 추천 <b>+270%</b></span></span><span class="mono crr-y">2022 – 현재</span><span class="n crr-t" data-start="2022-08"></span><span class="ch" aria-hidden="true">›</span></button>
-          <button class="lyr crr-co" data-c="kidari" data-h="키다리스튜디오 · 2019.04 – 2022.08" aria-pressed="false"><span class="crr-n"><b>키다리스튜디오</b><small>대리 → 과장 · 기획/마케팅팀</small><span class="crr-k">글로벌 앱 런칭 <b>20만 명</b></span></span><span class="mono crr-y">2019 – 2022</span><span class="n crr-t">3년 5개월</span><span class="ch" aria-hidden="true">›</span></button>
-          <button class="lyr crr-co" data-c="bank" data-h="뱅크미디어 · 2015.09 – 2018.08" aria-pressed="false"><span class="crr-n"><b>뱅크미디어</b><small>대리 · 기획팀</small><span class="crr-k">신규 카테고리 매출 <b>300%</b></span></span><span class="mono crr-y">2015 – 2018</span><span class="n crr-t">3년</span><span class="ch" aria-hidden="true">›</span></button>
-          <button class="lyr crr-co" data-c="testenc" data-h="테스트이앤씨 · 2012.11 – 2015.01" aria-pressed="false"><span class="crr-n"><b>테스트이앤씨</b><small>사원 · Mobile1</small><span class="crr-k">LG전자 모바일 SW 테스트</span></span><span class="mono crr-y">2012 – 2015</span><span class="n crr-t">2년 3개월</span><span class="ch" aria-hidden="true">›</span></button>
+          <button class="lyr crr-co on" data-c="pulmuone" data-h="2022.08 – 현재" aria-pressed="true"><span class="crr-n"><b>풀무원 <em class="st run">현재</em></b><small>과장 · AX엔지니어링</small></span><span class="ch" aria-hidden="true">›</span></button>
+          <button class="lyr crr-co" data-c="kidari" data-h="2019.04 – 2022.08" aria-pressed="false"><span class="crr-n"><b>키다리스튜디오</b><small>대리 → 과장 · 기획/마케팅팀</small></span><span class="ch" aria-hidden="true">›</span></button>
+          <button class="lyr crr-co" data-c="bank" data-h="2015.09 – 2018.08" aria-pressed="false"><span class="crr-n"><b>뱅크미디어</b><small>대리 · 기획팀</small></span><span class="ch" aria-hidden="true">›</span></button>
+          <button class="lyr crr-co" data-c="testenc" data-h="2012.11 – 2015.01" aria-pressed="false"><span class="crr-n"><b>테스트이앤씨</b><small>사원 · Mobile1</small></span><span class="ch" aria-hidden="true">›</span></button>
           </div>
         </div>
         <div class="panel">
-          <div class="ph"><span>자리와 성과</span><span id="crr-head" class="cur-chip">풀무원 · 2022.08 – 현재</span></div>
+          <div class="ph"><span>역할과 성과</span><span id="crr-head" class="cur-chip">2022.08 – 현재</span></div>
           <div class="crr-body">
           <div class="crr-d" data-c="pulmuone">
-            <p class="crr-meta"><b>과장</b> · AX엔지니어링<span class="crr-t2" data-start="2022-08"></span></p>
-            <p class="crr-scope"><span class="mono">담당</span>#풀무원 · 엠버십 서비스 기획, AI 업무 내재화</p>
-            <p class="crr-sub mono">주요 성과</p>
+            <p class="crr-scope">#풀무원 · 엠버십 서비스 기획, AI 업무 내재화</p>
             <ul class="hl">
-              <li><span>AI 상품 추천 · 추천 영역 매출</span><b>+270%</b></li>
-              <li><span>GEO 구조화 데이터 · 유입 세션</span><b>+174%</b></li>
-              <li><span>상품 상세 에디터 · 퍼블리셔 운영 공수</span><b>−95%</b></li>
+              <li><span>AI 상품 추천</span><b>+270%</b></li>
+              <li><span>CRM 타겟팅 자동화</span><b>연 24억</b></li>
+              <li><span>상품 상세 에디터 (GEO)</span><b>−95%</b></li>
             </ul>
-            <a class="crr-more" href="#work">프로젝트 7건 자세히 보기 →</a>
+            <a class="crr-more" href="#work">그 외 4건 더보기 →</a>
           </div>
           <div class="crr-d" data-c="kidari" hidden>
-            <p class="crr-meta"><b>대리 → 과장</b> · 기획/마케팅팀<span class="crr-t2"> · 3년 5개월</span></p>
-            <p class="crr-scope"><span class="mono">담당</span>웹툰 국내 · 글로벌 서비스 기획</p>
-            <p class="crr-sub mono">주요 성과</p>
+            <p class="crr-scope">웹툰 국내 · 글로벌 서비스 기획</p>
             <ul class="hl">
               <li><span>글로벌 앱 런칭 (태국 · 대만)</span><b>20만 명</b></li>
-              <li><span>신규 쿠폰 서비스 매출</span><b>4억</b></li>
-              <li><span>콘텐츠 파트너 플랫폼 운영비</span><b>−5%</b></li>
+              <li><span>신규 쿠폰 서비스</span><b>매출 4억</b></li>
+              <li><span>콘텐츠 파트너 플랫폼</span><b>운영비 −5%</b></li>
             </ul>
-            <a class="crr-more" href="work.html?p=global">글로벌 서비스 런칭 자세히 보기 →</a>
+            <a class="crr-more" href="work.html?p=global">그 외 1건 더보기 →</a>
           </div>
           <div class="crr-d" data-c="bank" hidden>
-            <p class="crr-meta"><b>대리</b> · 기획팀<span class="crr-t2"> · 3년</span></p>
-            <p class="crr-scope"><span class="mono">담당</span>콘텐츠 플랫폼 서비스 기획</p>
-            <p class="crr-sub mono">주요 성과</p>
+            <p class="crr-scope">콘텐츠 플랫폼 서비스 기획</p>
             <ul class="hl">
-              <li><span>신규 카테고리 서비스 매출</span><b>300%</b></li>
-              <li><span>전용 플레이어 앱 전환율</span><b>+5%</b></li>
+              <li><span>신규 카테고리 서비스</span><b>매출 300%</b></li>
+              <li><span>전용 플레이어 앱</span><b>전환율 +5%</b></li>
               <li><span>매출 통계 · 정산</span><b class="t">백오피스 구축</b></li>
             </ul>
           </div>
           <div class="crr-d" data-c="testenc" hidden>
-            <p class="crr-meta"><b>사원</b> · Mobile1<span class="crr-t2"> · 2년 3개월</span></p>
-            <p class="crr-scope"><span class="mono">담당</span>LG전자 모바일 SW QA</p>
-            <p class="crr-sub mono">주요 성과</p>
+            <p class="crr-scope">LG전자 모바일 SW QA</p>
             <ul class="hl">
               <li><span>출시 전 SW 테스트 케이스 분석 · 설계</span><b class="t">QA</b></li>
               <li><span>개발 산출물 검수 · 개선안 도출</span><b class="t">검수</b></li>
@@ -195,6 +189,16 @@
           </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Voice -->
+    <section id="voice" data-name="Voice">
+      <div class="sh"><p class="mono">// voice</p><h2>함께 일한 동료의 말</h2></div>
+      <div class="panel wks voice">
+        <div class="ph"><span>결과는 숫자로, 협업은 동료의 말로</span><span></span></div>
+        <div class="wk vo"><span class="wk-t"><b>“기획과 개발 사이에서 필요한 부분을 <u>잘 조율해 주어</u>, 함께 일할 때 <u>신뢰할 수 있는 동료</u>였습니다.”</b><small>기획 의도와 필요한 내용을 <u>명확하게 설명</u>해 주었고, 이슈가 생겼을 때도 <u>개발 쪽 의견을 잘 들어주며</u> 함께 해결 방법을 찾아갔습니다.</small></span><span class="wk-n"><b>백엔드 개발자</b><small>현 직장 · 엠버십 프로젝트</small></span></div>
+        <div class="wk vo"><span class="wk-t"><b>“함께 일하면서 가장 인상 깊었던 점은 <u>꼼꼼함과 책임감</u>이었습니다.”</b><small>업무를 <u>체계적으로 정리하고 계획적으로 진행</u>하며, 현업과 개발자 사이에서 의견을 잘 조율해 프로젝트가 <u>원활하게 진행</u>될 수 있도록 돕습니다.</small></span><span class="wk-n"><b>퍼블리셔</b><small>현 직장 · 상품 상세 에디터 (GEO)</small></span></div>
       </div>
     </section>
 
@@ -226,7 +230,7 @@
   </main>
 </div>
 
-<script src="js/projects.js?v=20261025f"></script>
-<script src="js/main.js?v=20261025f"></script>
+<script src="js/projects.js?v=20261026c"></script>
+<script src="js/main.js?v=20261026c"></script>
 </body>
 </html>

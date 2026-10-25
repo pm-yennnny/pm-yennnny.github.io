@@ -113,19 +113,15 @@ onceVisible(logBox, () => {
 const crr = document.querySelector('.crr');
 if (crr) {
   const head = document.getElementById('crr-head');
-  // 지금 회사의 재직 기간은 오늘 날짜로 계산한다 (입사 달 포함)
-  crr.querySelectorAll('[data-start]').forEach(el => {
-    const [y, m] = el.dataset.start.split('-').map(Number), now = new Date();
-    const months = (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - m) + 1;
-    const t = `${Math.floor(months / 12)}년${months % 12 ? ` ${months % 12}개월` : ''}`;
-    el.textContent = el.classList.contains('crr-t2') ? ` · ${t}` : t;
-  });
+  // 오른쪽 이름표: 근무 기간만 (회사명과 재직 기간은 왼쪽 목록에 있으므로 뺀다)
+  const showHead = b => { head.textContent = b.dataset.h; };
+  showHead(crr.querySelector('.crr-co.on'));
   crr.addEventListener('click', e => {
     const b = e.target.closest('.crr-co');
     if (!b) return;
     crr.querySelectorAll('.crr-co').forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
     crr.querySelectorAll('.crr-d').forEach(d => { d.hidden = d.dataset.c !== b.dataset.c; });
-    head.textContent = b.dataset.h;
+    showHead(b);
   });
 }
 
@@ -149,24 +145,30 @@ document.querySelectorAll('.copy').forEach(btn => {
   });
 });
 
-// ── 메뉴의 Work를 누르면 그 아래에 프로젝트 목록이 열린다 ──
-// 스크롤만 할 때는 열리지 않는다. 다시 누르거나 Work 영역을 벗어나면 닫힌다.
-const navWork = document.getElementById('nav-work');
-const subBox = document.getElementById('sub');
-let subOpen = false;      // 목록이 열려 있는지
-let enteredWork = false;  // 연 뒤에 Work 영역에 들어온 적이 있는지
-function setSub(open) {
-  subOpen = open;
-  enteredWork = false;
-  subBox.classList.toggle('open', open);
-  navWork.classList.toggle('open', open);
-  navWork.setAttribute('aria-expanded', open);
+// ── 메뉴의 Work·Lab을 누르면 그 아래에 상세 페이지 목록이 열린다 ──
+// 스크롤만 할 때는 열리지 않는다. 다시 누르거나 그 영역을 벗어나면 닫힌다.
+// 상세 페이지가 있는 영역(Work, Lab)만 목록이 있고, Career·Voice처럼 상세가 없는 영역에는 없다.
+const accs = [];
+function makeAcc(linkId, boxId, sectionId, items) {
+  const link = document.getElementById(linkId), box = document.getElementById(boxId);
+  if (!link || !box || !items.length) return;
+  const acc = { sectionId, open: false, entered: false };
+  acc.set = open => {
+    acc.open = open; acc.entered = false;
+    box.classList.toggle('open', open);
+    link.classList.toggle('open', open);
+    link.setAttribute('aria-expanded', open);
+  };
+  box.innerHTML = items.map(p =>
+    `<a href="work.html?p=${p.slug}">${p.title}</a>`).join('');
+  link.addEventListener('click', () => {   // 영역으로 이동하는 기본 동작은 그대로 둔다
+    accs.forEach(a => { if (a !== acc && a.open) a.set(false); });
+    acc.set(!acc.open);
+  });
+  accs.push(acc);
 }
-if (navWork && subBox && window.PROJECTS) {
-  subBox.innerHTML = window.PROJECTS.map(p =>
-    `<a href="work.html?p=${p.slug}"><span class="mono">${p.no}</span>${p.title}</a>`).join('');
-  navWork.addEventListener('click', () => setSub(!subOpen));  // 영역으로 이동하는 기본 동작은 그대로 둔다
-}
+makeAcc('nav-work', 'sub', 'work', window.PROJECTS || []);
+makeAcc('nav-lab', 'sub-lab', 'lab', window.LABS || []);
 
 // ── 현재 보고 있는 섹션을 메뉴와 상단 경로에 표시 ──
 const links = [...document.querySelectorAll('#nav a')];
@@ -211,11 +213,12 @@ function spy() {
     jumpTo = null; clearTimeout(jumpTimer);
   }
   mark(cur);
-  // 프로젝트 목록을 열어 둔 채 Work 영역을 벗어나면 저절로 닫는다.
-  if (subOpen) {
-    if (cur.id === 'work') enteredWork = true;
-    else if (enteredWork) setSub(false);
-  }
+  // 목록을 열어 둔 채 그 영역을 벗어나면 저절로 닫는다.
+  accs.forEach(a => {
+    if (!a.open) return;
+    if (cur.id === a.sectionId) a.entered = true;
+    else if (a.entered) a.set(false);
+  });
 }
 addEventListener('scroll', spy, { passive: true });
 addEventListener('resize', spy);
