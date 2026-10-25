@@ -51,11 +51,10 @@ const LOG = [
   ['2019', '쿠폰 서비스', '프로젝트 리드', { s: '쿠폰 화면, 결제 경로', l: '세그먼트별 자동 발송', d: '쿠폰 지표 대시보드', b: '쿠폰 생성 · 발행 · 정산', p: '쿠폰 정책 표준화' }],
   ['2017', '신규 카테고리 서비스', '수익 모델 · 정책 수립', { s: 'PC · Mobile · Tablet 화면', d: '고객 성향 · 판매량 데이터 분석', b: '매출 통계 · 정산', p: '수익 모델과 이용 정책' }],
   ['2016', '전용 플레이어 앱', 'PM · 스토어 출시', { s: '앱 화면과 사용 경험', d: '행동 데이터 수집, 웹 연동', p: '운영 정책, 스토어 배포' }],
-  ['2012', 'LG전자 모바일 SW 테스트', 'QA · 테스트 설계', { l: 'SW 테스트 케이스 분석·설계', p: '산출물 검수, QA 리포트' }],
+  ['2012', 'LG전자 모바일 SW 테스트', 'QA · 테스트 설계', { l: '테스트 케이스 분석·설계', p: '산출물 검수, QA 리포트' }],
 ];
 const layersBox = document.getElementById('layers');
 const logBox = document.getElementById('log');
-const logHead = document.getElementById('log-head');
 let curLayer = null;   // 선택한 층 (null이면 전체)
 let typing = false;    // 처음 한 줄씩 쌓이는 중인지
 
@@ -65,8 +64,8 @@ const logLine = (row, text) => `<span class="y">${row[0]}</span> ${row[1]} <span
 function renderLog() {
   typing = false;
   const rows = curLayer ? LOG.filter(r => r[3][curLayer]) : LOG;
-  // 운영 정책 · 문서는 맨 마지막 줄 뒤에 "등"을 붙인다 (적힌 것 외에도 문서가 더 있다는 뜻)
-  logBox.innerHTML = rows.map((r, i) => `<p>${logLine(r, (curLayer ? r[3][curLayer] : r[2]) + (curLayer === 'p' && i === rows.length - 1 ? ' 등' : ''))}</p>`).join('');
+  // 맨 마지막 줄 뒤에는 "등"을 붙인다 (적힌 것 외에도 더 있다는 뜻)
+  logBox.innerHTML = rows.map((r, i) => `<p>${logLine(r, (curLayer ? r[3][curLayer] : r[2]) + (i === rows.length - 1 ? ' 등' : ''))}</p>`).join('');
   logBox.lastElementChild?.classList.add('cur');
 }
 function setLayer(key) {
@@ -76,7 +75,6 @@ function setLayer(key) {
     b.classList.toggle('on', on);
     b.setAttribute('aria-pressed', on);
   });
-  logHead.textContent = LAYERS.find(l => (l[0] || null) === curLayer)[1];
   renderLog();
 }
 if (layersBox) {
@@ -103,7 +101,7 @@ onceVisible(logBox, () => {
     logBox.querySelector('.cur')?.classList.remove('cur');
     const p = document.createElement('p');
     p.className = 'cur';
-    p.innerHTML = logLine(LOG[i], LOG[i][2]);
+    p.innerHTML = logLine(LOG[i], LOG[i][2] + (i === LOG.length - 1 ? ' 등' : ''));
     logBox.append(p);
     if (++i < LOG.length) setTimeout(next, 600);
     else typing = false;
