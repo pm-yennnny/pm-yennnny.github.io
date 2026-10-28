@@ -15,7 +15,7 @@ function onceVisible(el, fn, threshold = 0.3) {
 document.querySelectorAll('.v[data-n]').forEach(el => onceVisible(el, () => {
   const n = +el.dataset.n, dur = 1300, t0 = performance.now();
   (function tick(t) {
-    const k = dur ? Math.min((t - t0) / dur, 1) : 1;
+    const k = dur ? Math.min(Math.max((t - t0) / dur, 0), 1) : 1;   // 첫 프레임 시각이 t0보다 이를 수 있어 0 아래로 내려가지 않게
     el.textContent = el.dataset.p + Math.round(n * (1 - Math.pow(1 - k, 3))) + el.dataset.s;
     if (k < 1) requestAnimationFrame(tick);
   })(t0);

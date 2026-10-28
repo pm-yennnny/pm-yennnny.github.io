@@ -349,6 +349,7 @@ a.job:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
    색 면은 쓰지 않는다. 확정 성과는 숫자 아래 형광펜, 예상·진행 중은 회색 숫자로 구분한다. */
 .legend{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600}
 .legend i{width:22px;height:8px;border-radius:2px;margin-left:12px}
+.legend .lg-t{font-weight:800;color:var(--ink)}  /* 정렬 기준: 최신순 (예상 성과는 맨 뒤) */
 .lg-a{background:var(--accent)}.lg-b{background:#C9C4B8}
 .wk{display:grid;grid-template-columns:minmax(0,1fr) 196px 22px;align-items:center;gap:22px;padding:0 26px;border-bottom:1.5px solid var(--line);transition:background .15s}
 .wk:last-child{border-bottom:0}
@@ -403,7 +404,8 @@ a.job:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
 .hl b.t{font-size:12px;font-weight:700;border:1.5px solid var(--ink);border-radius:99px;padding:1px 9px;letter-spacing:0}
 
 @media(max-width:820px){
-  .legend{display:none}
+  #work .sh{flex-wrap:wrap;row-gap:6px}
+  #work .legend{flex-basis:100%;margin-left:0}  /* 휴대폰: 범례를 제목 아래 한 줄로 */
   .wk{grid-template-columns:minmax(0,1fr) 104px;gap:12px;padding:0 16px}
   .wk-t{padding:16px 0}
   .wk-n{padding-left:12px}
