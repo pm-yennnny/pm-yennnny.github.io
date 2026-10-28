@@ -378,17 +378,16 @@ a.job:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
 /* 네 회사 내용을 같은 칸에 겹쳐 두고 고른 것만 보이게 한다: 회사를 바꿔도 영역 높이가 변하지 않는다 */
 .crr-d{grid-area:1 / 1}
 .crr-d[hidden]{display:block;visibility:hidden}
-/* 함께 일한 동료의 말: 대표 프로젝트 행과 같은 형식. 왼쪽은 동료의 말, 오른쪽은 출처(직무 · 프로젝트) */
-.voice{margin-top:0}
-.wk.vo{cursor:default;grid-template-columns:minmax(0,1fr) 196px}
-.wk.vo:hover{background:none}
-.wk.vo .wk-t b{font-size:17px;line-height:1.5}
-.wk.vo .wk-t small{font-size:13.5px}
-.wk.vo .wk-n b{font-size:18px;letter-spacing:-.03em;white-space:nowrap}
-.wk.vo .wk-n small a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-/* 핵심 문장: 대표 프로젝트 숫자와 같은 노란 형광펜 밑줄 */
-.wk.vo u{text-decoration:none;background:linear-gradient(transparent 62%,var(--accent) 62%);color:var(--ink);padding:0 1px}
-@media(max-width:820px){.wk.vo{grid-template-columns:1fr;gap:0}.wk.vo .wk-t{padding-bottom:10px}.wk.vo .wk-n{grid-column:1;border-left:0;padding:0 0 20px}.wk.vo .wk-n b{font-size:15px}}
+/* 함께 일한 동료의 말: '업무 효율을 높이는 AI'와 같은 3칸 카드. 위는 '나'(노란 몸) 캐릭터가 칭찬받은 행동을 하는 그림,
+   아래는 큰 따옴표 · 굵은 핵심 문장(형광펜) · 나머지 문장(전문) · 말한 사람. 말한 사람 줄은 세 카드 모두 맨 아래에 맞춘다 */
+.vc{display:flex;flex-direction:column}
+.vc .pb{flex:1;display:flex;flex-direction:column;padding:20px 22px 0}
+.cards3 .vc .qm{font-size:60px;font-weight:900;line-height:1;height:34px;letter-spacing:-.05em;color:var(--ink);margin:0}
+.cards3 .vc .qt{font-size:17px;font-weight:800;line-height:1.55;letter-spacing:-.02em;color:var(--ink);margin-top:8px}
+.cards3 .vc .qs{font-size:13.5px;color:var(--sub);margin:10px 0 18px;line-height:1.65}
+.cards3 .vc p.by{margin-top:auto;padding:12px 0 18px;border-top:1.5px solid var(--line);font-size:12.5px}
+.vc .by b{color:var(--ink);font-weight:800;margin-right:8px}
+.vc mark{background:linear-gradient(transparent 62%,var(--accent) 62%);color:inherit;padding:0 1px}
 @media(max-width:1080px){.two.crr{grid-template-columns:1fr}.crr .lyrs{grid-auto-rows:auto}}
 
 .crr-scope{font-size:16px;font-weight:800;letter-spacing:-.02em;line-height:1.5;padding-top:18px}  /* 담당 범위: 꼬리표 없이 굵은 한 문장 */
@@ -406,6 +405,8 @@ a.job:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
 @media(max-width:820px){
   #work .sh{flex-wrap:wrap;row-gap:6px}
   #work .legend{flex-basis:100%;margin-left:0}  /* 휴대폰: 범례를 제목 아래 한 줄로 */
+  #voice .sh{flex-wrap:wrap;row-gap:6px}
+  #voice .sh span{flex-basis:100%;margin-left:0}  /* 휴대폰: 한 줄 소개를 제목 아래로 */
   .wk{grid-template-columns:minmax(0,1fr) 104px;gap:12px;padding:0 16px}
   .wk-t{padding:16px 0}
   .wk-n{padding-left:12px}
