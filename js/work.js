@@ -72,7 +72,7 @@ function render() {
         ${P.team ? `<div><dt class="mono">함께한 사람</dt><dd>${esc(P.team)}</dd></div>` : ''}
         ${dots ? `<div><dt class="mono">기여도</dt><dd class="dots">${dots}</dd></div>` : ''}
       </dl>
-      ${P.kpis && P.kpis.length ? `<div class="d-kpis">${P.kpis.map((k, i) => `<div class="kpi${i ? '' : ' pt'}"><p class="v">${esc(k.v)}</p><p class="l">${esc(k.l)}</p></div>`).join('')}</div>` : ''}
+      ${P.kpis && P.kpis.length ? `<div class="d-kpis">${P.kpis.map((k, i) => `<div class="kpi${i ? '' : ' pt'}"><p class="v">${esc(k.v)}</p><p class="l">${esc(k.l).replace(' (', '<br>(')}</p></div>`).join('')}</div>` : ''}
     </div>
     ${P.blocks.map(b => b.type === 'phase' ? `<section class="phase"><span class="tag mono">${esc(b.tag)}</span><h2>${esc(b.title)}</h2>${b.p ? `<p>${esc(b.p)}</p>` : ''}</section>` : `<section class="blk${b.title ? '' : ' cont'}">${b.title ? `<div class="sh"><h2>${esc(b.title)}</h2></div>` : ''}<div class="panel${b.type === 'figures' || b.type === 'todo' ? ' bare' : ''}">${BLOCK[b.type](b)}</div></section>`).join('')}
     <nav class="pn">${LAB ? labNav() : `
